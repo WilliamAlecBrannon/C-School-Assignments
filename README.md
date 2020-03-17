@@ -1,1 +1,1 @@
-# C-School-Assignments
+# C++-School-Assignments
