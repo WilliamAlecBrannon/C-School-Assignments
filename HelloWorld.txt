@@ -1,0 +1,23 @@
+Example Exercise Document:
+Author: William Brannon
+Date: 1/16/158
+Exercise 1: Hello World
+CONSOLE OUTPUT/TESTING RESULTS:
+Hello World
+I am learning C++
+Press any key to continue . . .
+C++ SOURCE CODE:
+//Hello World Program
+//By William Brannon 1/16/18
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	cout << "Hello World"<<endl;
+	cout << "I am learning C++"<<endl;
+	system("pause");
+	return 0;
+}

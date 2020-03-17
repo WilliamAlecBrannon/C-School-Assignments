@@ -1,0 +1,38 @@
+Exercise Document:
+Author: William Brannon
+Date: 1/24/2018
+Exercise 3: Miles per Gallon
+CONSOLE OUTPUT/TESTING RESULTS:
+How many gallons of gas can the car hold? 20
+How many miles can you drive on a full tank? 100
+This car gets 5 miles per gallon.
+Press any key to continue . . .
+C++ SOURCE CODE:
+//Miles Per Gallon Program
+//By William Brannon 02/09/2018
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+	double gallons; // to hold the gas tank capacity (in gallons)
+	double miles;   // to hold the miles the car can go on 1 tank of gas
+	double mileage; // to hold the calculated miles per gallon
+
+	//get the gas tank capacity
+	cout << "How many gallons of gas can the car hold? ";
+	cin >> gallons;
+
+	//get the miles the car can travel on a full tank
+	cout << "How many miles can you drive on a full tank? ";
+	cin >> miles;
+
+	//calculate the miles per gallon
+	mileage = miles / gallons;
+
+	//display the result
+	cout << "This car gets " << mileage << " miles per gallon.\n";
+	system("pause");
+	return 0;
+}
