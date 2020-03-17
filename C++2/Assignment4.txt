@@ -1,0 +1,293 @@
+William Brannon
+Assignment 4: Class Constructors
+Testing Results:
+The default date for the default constructor is 1/1/1900
+The date for testing the parameterized constructor is 9/8/2018
+The data from the second test was copied into the first and now the date is 9/8/2018
+2019 is not a valid year.
+There is no 13th month.
+There is no 31st day of this month.
+2018 is not a leap year.
+Press any key to continue . . .
+Source Code:
+// Assignment 4 Class Constructors
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Date {
+	int day;
+	int month;
+	int year;
+public:
+	Date() {
+		day = 1;
+		month = 1;
+		year = 1900;
+	};
+	Date(int x, int y, int z) {
+		if (isValidDay(x,y,z) && isValidMonth(y) && isValidYear(z)) {
+			day = x;
+			month = y;
+			year = z;
+		}
+		else {
+			day = 1;
+			month = 1;
+			year = 1900;
+		}
+	};
+	Date(const Date &d2) { 
+		day = d2.day; 
+		month = d2.month;
+		year = d2.year;
+	}
+	~Date() {
+		delete &day;
+		delete &month;
+		delete &year;
+	};
+	int getDay() { return day; }
+	int getMonth() { return month; }
+	int getYear() { return year; }
+	string printDate(int, int);
+	static bool isValidYear(int testYear) {
+		if (testYear < 1900 || testYear > 2018) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	static bool isValidMonth(int testMonth) {
+		if (testMonth < 1 || testMonth > 12) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	static bool isValidDay(int testDay, int testMonth, int testYear) {
+		switch (testMonth) {
+		case 1:
+			if (testDay < 1 || testDay > 31) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 2:
+			if (isLeapYear(testYear)) {
+				if (testDay < 1 || testDay > 29) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+			else {
+				if (testDay < 1 || testDay > 28) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+			break;
+		case 3:
+			if (testDay < 1 || testDay > 31) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 4:
+			if (testDay < 1 || testDay > 30) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 5:
+			if (testDay < 1 || testDay > 31) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 6:
+			if (testDay < 1 || testDay > 30) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 7:
+			if (testDay < 1 || testDay > 31) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 8:
+			if (testDay < 1 || testDay > 31) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 9:
+			if (testDay < 1 || testDay > 30) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 10:
+			if (testDay < 1 || testDay > 31) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 11:
+			if (testDay < 1 || testDay > 30) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		case 12:
+			if (testDay < 1 || testDay > 31) {
+				return false;
+			}
+			else {
+				return true;
+			}
+			break;
+		default:
+			return false;
+		}
+	}
+	static bool isLeapYear(int testYear) {
+		if ((testYear % 4 == 0 && testYear % 100 != 0) || (testYear % 400 == 0))
+			return true;
+		else
+			return false;
+	}
+};
+
+string Date::printDate(int x, int y) {
+	string output = "";
+	string monthName = "";
+	switch (y) {
+	case 1:
+		monthName = "January";
+		break;
+	case 2:
+		monthName = "February";
+		break;
+	case 3:
+		monthName = "March";
+		break;
+	case 4:
+		monthName = "April";
+		break;
+	case 5:
+		monthName = "May";
+		break;
+	case 6:
+		monthName = "June";
+		break;
+	case 7:
+		monthName = "July";
+		break;
+	case 8:
+		monthName = "August";
+		break;
+	case 9:
+		monthName = "September";
+		break;
+	case 10:
+		monthName = "October";
+		break;
+	case 11:
+		monthName = "November";
+		break;
+	case 12:
+		monthName = "December";
+		break;
+	default:
+		monthName = "";
+	}
+	switch (x) {
+	case 1:
+		output += to_string(month) + "/" + to_string(day) + "/" + to_string(year);
+		return output;
+	case 2:
+		output += monthName + " " + to_string(day) + ", " + to_string(year);
+		return output;
+	case 3:
+		output += to_string(day) + " " + monthName + " " + to_string(year);
+		return output;
+	default:
+		output += "Invalid input";
+		return output;
+	}
+}
+
+int main() {
+	//default constructor
+	Date time;
+	cout << "The default date for the default constructor is " << time.printDate(1, time.getMonth()) << endl;
+	//parameterized constructor
+	Date time2 = { 8,9,2018 };
+	cout << "The date for testing the parameterized constructor is " << time2.printDate(1, time2.getMonth()) << endl;
+	//copy constructor
+	time = time2;
+	cout << "The data from the second test was copied into the first and now the date is " << time.printDate(1, time.getMonth()) << endl;
+	//valid year test
+	if (time.isValidYear(2019)) {
+		cout << "2019 is a valid year." << endl;
+	}
+	else {
+		cout << "2019 is not a valid year." << endl;
+	};
+	//valid month test
+	if (time.isValidMonth(13)) {
+		cout << "There is a 13th month." << endl;
+	}
+	else {
+		cout << "There is no 13th month." << endl;
+	};
+	//valid day test
+	if (time.isValidDay(31,9,2018)) {
+		cout << "There is a 31st day of this month." << endl;
+	}
+	else {
+		cout << "There is no 31st day of this month." << endl;
+	};
+	//leap year test
+	if (time.isLeapYear(2018)) {
+		cout << "2018 is a leap year." << endl;
+	}
+	else {
+		cout << "2018 is not a leap year." << endl;
+	};
+	system("pause");
+	return 0;
+}

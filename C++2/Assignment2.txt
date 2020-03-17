@@ -1,0 +1,75 @@
+William Brannon
+Assignment 2: Structured Data
+Testing Results:
+Amy Adams,91
+Bob Barr,84
+Carla Carr,79
+Dan Dobbs,70
+Elena Evans,77
+Press any key to continue . . .
+Source Code:
+//Assignment 2 Structured Data
+//By William Brannon 
+//8/27/18
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int NG = 4;
+
+string names[] = { "Amy Adams", "Bob Barr", "Carla Carr", "Dan Dobbs", "Elena Evans" };
+
+int exams[][NG] = { { 98,87,93,88 },
+{ 78,86,82,91 },
+{ 66,71,85,94 },
+{ 72,63,77,69 },
+{ 91,83,76,60 } };
+
+struct studentRecord {
+	string name;
+	int grades[NG];
+	int average;
+	studentRecord()
+	{
+		name = "";
+		average = 0;
+		for (int n = 0; n < NG; ++n) {
+			grades[n] = 0;
+		}
+	}
+};
+
+void calculateAverage(studentRecord students[], int num) {
+	for (int i = 0; i < num; i++) {
+		int temp = 0;
+		for (int j = 0; j < NG; j++) {
+			temp += students[i].grades[j];
+		}
+		temp /= NG;
+		students[i].average = temp;
+	}
+}
+
+void display(studentRecord students[], int num) {
+	for (int i = 0; i < num; i++) {
+		cout << students[i].name << "," << students[i].average << endl;
+	}
+}
+
+int main() {
+	int numStudents = sizeof(names) / sizeof(names[0]);
+	studentRecord* Records = new studentRecord[numStudents];
+	for (int i = 0; i < numStudents; i++) {
+		Records[i].name = names[i];
+		for (int j = 0; j < NG; j++) {
+			Records[i].grades[j] = exams[i][j];
+		}
+	}
+	calculateAverage(Records,numStudents);
+	display(Records,numStudents);
+	system("pause");
+	return 0;
+}

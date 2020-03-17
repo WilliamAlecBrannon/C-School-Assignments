@@ -1,0 +1,878 @@
+William Brannon
+Exercise 8: Class Composition
+Testing Results:
+Current Mileage: 0
+Current Fuel: 0
+Current Mileage: 0
+Current Fuel: 1
+Current Mileage: 0
+Current Fuel: 2
+Current Mileage: 0
+Current Fuel: 3
+Current Mileage: 0
+Current Fuel: 4
+Current Mileage: 0
+Current Fuel: 5
+Current Mileage: 0
+Current Fuel: 6
+Current Mileage: 0
+Current Fuel: 7
+Current Mileage: 0
+Current Fuel: 8
+Current Mileage: 0
+Current Fuel: 9
+Current Mileage: 0
+Current Fuel: 10
+Current Mileage: 0
+Current Fuel: 11
+Current Mileage: 0
+Current Fuel: 12
+Current Mileage: 0
+Current Fuel: 13
+Current Mileage: 0
+Current Fuel: 14
+Current Mileage: 0
+Current Fuel: 15
+Current Mileage: 1
+Current Fuel: 15
+Current Mileage: 2
+Current Fuel: 15
+Current Mileage: 3
+Current Fuel: 15
+Current Mileage: 4
+Current Fuel: 15
+Current Mileage: 5
+Current Fuel: 15
+Current Mileage: 6
+Current Fuel: 15
+Current Mileage: 7
+Current Fuel: 15
+Current Mileage: 8
+Current Fuel: 15
+Current Mileage: 9
+Current Fuel: 15
+Current Mileage: 10
+Current Fuel: 15
+Current Mileage: 11
+Current Fuel: 15
+Current Mileage: 12
+Current Fuel: 15
+Current Mileage: 13
+Current Fuel: 15
+Current Mileage: 14
+Current Fuel: 15
+Current Mileage: 15
+Current Fuel: 15
+Current Mileage: 16
+Current Fuel: 15
+Current Mileage: 17
+Current Fuel: 15
+Current Mileage: 18
+Current Fuel: 15
+Current Mileage: 19
+Current Fuel: 15
+Current Mileage: 20
+Current Fuel: 15
+Current Mileage: 21
+Current Fuel: 15
+Current Mileage: 22
+Current Fuel: 15
+Current Mileage: 23
+Current Fuel: 15
+Current Mileage: 24
+Current Fuel: 14
+Current Mileage: 25
+Current Fuel: 14
+Current Mileage: 26
+Current Fuel: 14
+Current Mileage: 27
+Current Fuel: 14
+Current Mileage: 28
+Current Fuel: 14
+Current Mileage: 29
+Current Fuel: 14
+Current Mileage: 30
+Current Fuel: 14
+Current Mileage: 31
+Current Fuel: 14
+Current Mileage: 32
+Current Fuel: 14
+Current Mileage: 33
+Current Fuel: 14
+Current Mileage: 34
+Current Fuel: 14
+Current Mileage: 35
+Current Fuel: 14
+Current Mileage: 36
+Current Fuel: 14
+Current Mileage: 37
+Current Fuel: 14
+Current Mileage: 38
+Current Fuel: 14
+Current Mileage: 39
+Current Fuel: 14
+Current Mileage: 40
+Current Fuel: 14
+Current Mileage: 41
+Current Fuel: 14
+Current Mileage: 42
+Current Fuel: 14
+Current Mileage: 43
+Current Fuel: 14
+Current Mileage: 44
+Current Fuel: 14
+Current Mileage: 45
+Current Fuel: 14
+Current Mileage: 46
+Current Fuel: 14
+Current Mileage: 47
+Current Fuel: 14
+Current Mileage: 48
+Current Fuel: 13
+Current Mileage: 49
+Current Fuel: 13
+Current Mileage: 50
+Current Fuel: 13
+Current Mileage: 51
+Current Fuel: 13
+Current Mileage: 52
+Current Fuel: 13
+Current Mileage: 53
+Current Fuel: 13
+Current Mileage: 54
+Current Fuel: 13
+Current Mileage: 55
+Current Fuel: 13
+Current Mileage: 56
+Current Fuel: 13
+Current Mileage: 57
+Current Fuel: 13
+Current Mileage: 58
+Current Fuel: 13
+Current Mileage: 59
+Current Fuel: 13
+Current Mileage: 60
+Current Fuel: 13
+Current Mileage: 61
+Current Fuel: 13
+Current Mileage: 62
+Current Fuel: 13
+Current Mileage: 63
+Current Fuel: 13
+Current Mileage: 64
+Current Fuel: 13
+Current Mileage: 65
+Current Fuel: 13
+Current Mileage: 66
+Current Fuel: 13
+Current Mileage: 67
+Current Fuel: 13
+Current Mileage: 68
+Current Fuel: 13
+Current Mileage: 69
+Current Fuel: 13
+Current Mileage: 70
+Current Fuel: 13
+Current Mileage: 71
+Current Fuel: 13
+Current Mileage: 72
+Current Fuel: 12
+Current Mileage: 73
+Current Fuel: 12
+Current Mileage: 74
+Current Fuel: 12
+Current Mileage: 75
+Current Fuel: 12
+Current Mileage: 76
+Current Fuel: 12
+Current Mileage: 77
+Current Fuel: 12
+Current Mileage: 78
+Current Fuel: 12
+Current Mileage: 79
+Current Fuel: 12
+Current Mileage: 80
+Current Fuel: 12
+Current Mileage: 81
+Current Fuel: 12
+Current Mileage: 82
+Current Fuel: 12
+Current Mileage: 83
+Current Fuel: 12
+Current Mileage: 84
+Current Fuel: 12
+Current Mileage: 85
+Current Fuel: 12
+Current Mileage: 86
+Current Fuel: 12
+Current Mileage: 87
+Current Fuel: 12
+Current Mileage: 88
+Current Fuel: 12
+Current Mileage: 89
+Current Fuel: 12
+Current Mileage: 90
+Current Fuel: 12
+Current Mileage: 91
+Current Fuel: 12
+Current Mileage: 92
+Current Fuel: 12
+Current Mileage: 93
+Current Fuel: 12
+Current Mileage: 94
+Current Fuel: 12
+Current Mileage: 95
+Current Fuel: 12
+Current Mileage: 96
+Current Fuel: 11
+Current Mileage: 97
+Current Fuel: 11
+Current Mileage: 98
+Current Fuel: 11
+Current Mileage: 99
+Current Fuel: 11
+Current Mileage: 100
+Current Fuel: 11
+Current Mileage: 101
+Current Fuel: 11
+Current Mileage: 102
+Current Fuel: 11
+Current Mileage: 103
+Current Fuel: 11
+Current Mileage: 104
+Current Fuel: 11
+Current Mileage: 105
+Current Fuel: 11
+Current Mileage: 106
+Current Fuel: 11
+Current Mileage: 107
+Current Fuel: 11
+Current Mileage: 108
+Current Fuel: 11
+Current Mileage: 109
+Current Fuel: 11
+Current Mileage: 110
+Current Fuel: 11
+Current Mileage: 111
+Current Fuel: 11
+Current Mileage: 112
+Current Fuel: 11
+Current Mileage: 113
+Current Fuel: 11
+Current Mileage: 114
+Current Fuel: 11
+Current Mileage: 115
+Current Fuel: 11
+Current Mileage: 116
+Current Fuel: 11
+Current Mileage: 117
+Current Fuel: 11
+Current Mileage: 118
+Current Fuel: 11
+Current Mileage: 119
+Current Fuel: 11
+Current Mileage: 120
+Current Fuel: 10
+Current Mileage: 121
+Current Fuel: 10
+Current Mileage: 122
+Current Fuel: 10
+Current Mileage: 123
+Current Fuel: 10
+Current Mileage: 124
+Current Fuel: 10
+Current Mileage: 125
+Current Fuel: 10
+Current Mileage: 126
+Current Fuel: 10
+Current Mileage: 127
+Current Fuel: 10
+Current Mileage: 128
+Current Fuel: 10
+Current Mileage: 129
+Current Fuel: 10
+Current Mileage: 130
+Current Fuel: 10
+Current Mileage: 131
+Current Fuel: 10
+Current Mileage: 132
+Current Fuel: 10
+Current Mileage: 133
+Current Fuel: 10
+Current Mileage: 134
+Current Fuel: 10
+Current Mileage: 135
+Current Fuel: 10
+Current Mileage: 136
+Current Fuel: 10
+Current Mileage: 137
+Current Fuel: 10
+Current Mileage: 138
+Current Fuel: 10
+Current Mileage: 139
+Current Fuel: 10
+Current Mileage: 140
+Current Fuel: 10
+Current Mileage: 141
+Current Fuel: 10
+Current Mileage: 142
+Current Fuel: 10
+Current Mileage: 143
+Current Fuel: 10
+Current Mileage: 144
+Current Fuel: 9
+Current Mileage: 145
+Current Fuel: 9
+Current Mileage: 146
+Current Fuel: 9
+Current Mileage: 147
+Current Fuel: 9
+Current Mileage: 148
+Current Fuel: 9
+Current Mileage: 149
+Current Fuel: 9
+Current Mileage: 150
+Current Fuel: 9
+Current Mileage: 151
+Current Fuel: 9
+Current Mileage: 152
+Current Fuel: 9
+Current Mileage: 153
+Current Fuel: 9
+Current Mileage: 154
+Current Fuel: 9
+Current Mileage: 155
+Current Fuel: 9
+Current Mileage: 156
+Current Fuel: 9
+Current Mileage: 157
+Current Fuel: 9
+Current Mileage: 158
+Current Fuel: 9
+Current Mileage: 159
+Current Fuel: 9
+Current Mileage: 160
+Current Fuel: 9
+Current Mileage: 161
+Current Fuel: 9
+Current Mileage: 162
+Current Fuel: 9
+Current Mileage: 163
+Current Fuel: 9
+Current Mileage: 164
+Current Fuel: 9
+Current Mileage: 165
+Current Fuel: 9
+Current Mileage: 166
+Current Fuel: 9
+Current Mileage: 167
+Current Fuel: 9
+Current Mileage: 168
+Current Fuel: 8
+Current Mileage: 169
+Current Fuel: 8
+Current Mileage: 170
+Current Fuel: 8
+Current Mileage: 171
+Current Fuel: 8
+Current Mileage: 172
+Current Fuel: 8
+Current Mileage: 173
+Current Fuel: 8
+Current Mileage: 174
+Current Fuel: 8
+Current Mileage: 175
+Current Fuel: 8
+Current Mileage: 176
+Current Fuel: 8
+Current Mileage: 177
+Current Fuel: 8
+Current Mileage: 178
+Current Fuel: 8
+Current Mileage: 179
+Current Fuel: 8
+Current Mileage: 180
+Current Fuel: 8
+Current Mileage: 181
+Current Fuel: 8
+Current Mileage: 182
+Current Fuel: 8
+Current Mileage: 183
+Current Fuel: 8
+Current Mileage: 184
+Current Fuel: 8
+Current Mileage: 185
+Current Fuel: 8
+Current Mileage: 186
+Current Fuel: 8
+Current Mileage: 187
+Current Fuel: 8
+Current Mileage: 188
+Current Fuel: 8
+Current Mileage: 189
+Current Fuel: 8
+Current Mileage: 190
+Current Fuel: 8
+Current Mileage: 191
+Current Fuel: 8
+Current Mileage: 192
+Current Fuel: 7
+Current Mileage: 193
+Current Fuel: 7
+Current Mileage: 194
+Current Fuel: 7
+Current Mileage: 195
+Current Fuel: 7
+Current Mileage: 196
+Current Fuel: 7
+Current Mileage: 197
+Current Fuel: 7
+Current Mileage: 198
+Current Fuel: 7
+Current Mileage: 199
+Current Fuel: 7
+Current Mileage: 200
+Current Fuel: 7
+Current Mileage: 201
+Current Fuel: 7
+Current Mileage: 202
+Current Fuel: 7
+Current Mileage: 203
+Current Fuel: 7
+Current Mileage: 204
+Current Fuel: 7
+Current Mileage: 205
+Current Fuel: 7
+Current Mileage: 206
+Current Fuel: 7
+Current Mileage: 207
+Current Fuel: 7
+Current Mileage: 208
+Current Fuel: 7
+Current Mileage: 209
+Current Fuel: 7
+Current Mileage: 210
+Current Fuel: 7
+Current Mileage: 211
+Current Fuel: 7
+Current Mileage: 212
+Current Fuel: 7
+Current Mileage: 213
+Current Fuel: 7
+Current Mileage: 214
+Current Fuel: 7
+Current Mileage: 215
+Current Fuel: 7
+Current Mileage: 216
+Current Fuel: 6
+Current Mileage: 217
+Current Fuel: 6
+Current Mileage: 218
+Current Fuel: 6
+Current Mileage: 219
+Current Fuel: 6
+Current Mileage: 220
+Current Fuel: 6
+Current Mileage: 221
+Current Fuel: 6
+Current Mileage: 222
+Current Fuel: 6
+Current Mileage: 223
+Current Fuel: 6
+Current Mileage: 224
+Current Fuel: 6
+Current Mileage: 225
+Current Fuel: 6
+Current Mileage: 226
+Current Fuel: 6
+Current Mileage: 227
+Current Fuel: 6
+Current Mileage: 228
+Current Fuel: 6
+Current Mileage: 229
+Current Fuel: 6
+Current Mileage: 230
+Current Fuel: 6
+Current Mileage: 231
+Current Fuel: 6
+Current Mileage: 232
+Current Fuel: 6
+Current Mileage: 233
+Current Fuel: 6
+Current Mileage: 234
+Current Fuel: 6
+Current Mileage: 235
+Current Fuel: 6
+Current Mileage: 236
+Current Fuel: 6
+Current Mileage: 237
+Current Fuel: 6
+Current Mileage: 238
+Current Fuel: 6
+Current Mileage: 239
+Current Fuel: 6
+Current Mileage: 240
+Current Fuel: 5
+Current Mileage: 241
+Current Fuel: 5
+Current Mileage: 242
+Current Fuel: 5
+Current Mileage: 243
+Current Fuel: 5
+Current Mileage: 244
+Current Fuel: 5
+Current Mileage: 245
+Current Fuel: 5
+Current Mileage: 246
+Current Fuel: 5
+Current Mileage: 247
+Current Fuel: 5
+Current Mileage: 248
+Current Fuel: 5
+Current Mileage: 249
+Current Fuel: 5
+Current Mileage: 250
+Current Fuel: 5
+Current Mileage: 251
+Current Fuel: 5
+Current Mileage: 252
+Current Fuel: 5
+Current Mileage: 253
+Current Fuel: 5
+Current Mileage: 254
+Current Fuel: 5
+Current Mileage: 255
+Current Fuel: 5
+Current Mileage: 256
+Current Fuel: 5
+Current Mileage: 257
+Current Fuel: 5
+Current Mileage: 258
+Current Fuel: 5
+Current Mileage: 259
+Current Fuel: 5
+Current Mileage: 260
+Current Fuel: 5
+Current Mileage: 261
+Current Fuel: 5
+Current Mileage: 262
+Current Fuel: 5
+Current Mileage: 263
+Current Fuel: 5
+Current Mileage: 264
+Current Fuel: 4
+Current Mileage: 265
+Current Fuel: 4
+Current Mileage: 266
+Current Fuel: 4
+Current Mileage: 267
+Current Fuel: 4
+Current Mileage: 268
+Current Fuel: 4
+Current Mileage: 269
+Current Fuel: 4
+Current Mileage: 270
+Current Fuel: 4
+Current Mileage: 271
+Current Fuel: 4
+Current Mileage: 272
+Current Fuel: 4
+Current Mileage: 273
+Current Fuel: 4
+Current Mileage: 274
+Current Fuel: 4
+Current Mileage: 275
+Current Fuel: 4
+Current Mileage: 276
+Current Fuel: 4
+Current Mileage: 277
+Current Fuel: 4
+Current Mileage: 278
+Current Fuel: 4
+Current Mileage: 279
+Current Fuel: 4
+Current Mileage: 280
+Current Fuel: 4
+Current Mileage: 281
+Current Fuel: 4
+Current Mileage: 282
+Current Fuel: 4
+Current Mileage: 283
+Current Fuel: 4
+Current Mileage: 284
+Current Fuel: 4
+Current Mileage: 285
+Current Fuel: 4
+Current Mileage: 286
+Current Fuel: 4
+Current Mileage: 287
+Current Fuel: 4
+Current Mileage: 288
+Current Fuel: 3
+Current Mileage: 289
+Current Fuel: 3
+Current Mileage: 290
+Current Fuel: 3
+Current Mileage: 291
+Current Fuel: 3
+Current Mileage: 292
+Current Fuel: 3
+Current Mileage: 293
+Current Fuel: 3
+Current Mileage: 294
+Current Fuel: 3
+Current Mileage: 295
+Current Fuel: 3
+Current Mileage: 296
+Current Fuel: 3
+Current Mileage: 297
+Current Fuel: 3
+Current Mileage: 298
+Current Fuel: 3
+Current Mileage: 299
+Current Fuel: 3
+Current Mileage: 300
+Current Fuel: 3
+Current Mileage: 301
+Current Fuel: 3
+Current Mileage: 302
+Current Fuel: 3
+Current Mileage: 303
+Current Fuel: 3
+Current Mileage: 304
+Current Fuel: 3
+Current Mileage: 305
+Current Fuel: 3
+Current Mileage: 306
+Current Fuel: 3
+Current Mileage: 307
+Current Fuel: 3
+Current Mileage: 308
+Current Fuel: 3
+Current Mileage: 309
+Current Fuel: 3
+Current Mileage: 310
+Current Fuel: 3
+Current Mileage: 311
+Current Fuel: 3
+Current Mileage: 312
+Current Fuel: 2
+Current Mileage: 313
+Current Fuel: 2
+Current Mileage: 314
+Current Fuel: 2
+Current Mileage: 315
+Current Fuel: 2
+Current Mileage: 316
+Current Fuel: 2
+Current Mileage: 317
+Current Fuel: 2
+Current Mileage: 318
+Current Fuel: 2
+Current Mileage: 319
+Current Fuel: 2
+Current Mileage: 320
+Current Fuel: 2
+Current Mileage: 321
+Current Fuel: 2
+Current Mileage: 322
+Current Fuel: 2
+Current Mileage: 323
+Current Fuel: 2
+Current Mileage: 324
+Current Fuel: 2
+Current Mileage: 325
+Current Fuel: 2
+Current Mileage: 326
+Current Fuel: 2
+Current Mileage: 327
+Current Fuel: 2
+Current Mileage: 328
+Current Fuel: 2
+Current Mileage: 329
+Current Fuel: 2
+Current Mileage: 330
+Current Fuel: 2
+Current Mileage: 331
+Current Fuel: 2
+Current Mileage: 332
+Current Fuel: 2
+Current Mileage: 333
+Current Fuel: 2
+Current Mileage: 334
+Current Fuel: 2
+Current Mileage: 335
+Current Fuel: 2
+Current Mileage: 336
+Current Fuel: 1
+Current Mileage: 337
+Current Fuel: 1
+Current Mileage: 338
+Current Fuel: 1
+Current Mileage: 339
+Current Fuel: 1
+Current Mileage: 340
+Current Fuel: 1
+Current Mileage: 341
+Current Fuel: 1
+Current Mileage: 342
+Current Fuel: 1
+Current Mileage: 343
+Current Fuel: 1
+Current Mileage: 344
+Current Fuel: 1
+Current Mileage: 345
+Current Fuel: 1
+Current Mileage: 346
+Current Fuel: 1
+Current Mileage: 347
+Current Fuel: 1
+Current Mileage: 348
+Current Fuel: 1
+Current Mileage: 349
+Current Fuel: 1
+Current Mileage: 350
+Current Fuel: 1
+Current Mileage: 351
+Current Fuel: 1
+Current Mileage: 352
+Current Fuel: 1
+Current Mileage: 353
+Current Fuel: 1
+Current Mileage: 354
+Current Fuel: 1
+Current Mileage: 355
+Current Fuel: 1
+Current Mileage: 356
+Current Fuel: 1
+Current Mileage: 357
+Current Fuel: 1
+Current Mileage: 358
+Current Fuel: 1
+Current Mileage: 359
+Current Fuel: 1
+Current Mileage: 360
+Current Fuel: 0
+Press any key to continue . . .
+Source Code:
+//Exercise 8: Class Composition
+//By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class FuelGauge
+{
+private:
+	int currentFuel;
+	int maxFuel;
+public:
+	FuelGauge(const int = 0, const int = 15);
+	FuelGauge(const FuelGauge&);
+	int reportFuelLevel();
+	int reportMaxFuel();
+	void incrementFuel();
+	void decrementFuel();
+};
+
+FuelGauge::FuelGauge(const int cFuel,const int mFuel) {
+	currentFuel = cFuel;
+	maxFuel = mFuel;
+}
+
+FuelGauge::FuelGauge(const FuelGauge& fGauge) {
+	currentFuel = fGauge.currentFuel;
+	maxFuel = fGauge.maxFuel;
+}
+
+int FuelGauge::reportFuelLevel() {
+	return currentFuel;
+}
+
+int FuelGauge::reportMaxFuel() {
+	return maxFuel;
+}
+
+void FuelGauge::incrementFuel() {
+	if (currentFuel < maxFuel) {
+		currentFuel++;
+	}
+}
+
+void FuelGauge::decrementFuel() {
+	if (currentFuel > 0) {
+		currentFuel--;
+	}
+}
+
+class Odometer {
+private:
+	FuelGauge fGauge;
+	int mileage;
+	int fuelEconomy;
+public:
+	Odometer(const int cFuel, const int mFuel, const int mile, const int fEconomy);
+	Odometer(const Odometer&);
+	int reportMileage();
+	int reportFuel();
+	void fillFuel();
+	void driveMile();
+};
+
+Odometer::Odometer(const int cFuel, const int mFuel, const int mile, const int fEconomy) {
+	fGauge = FuelGauge(cFuel, mFuel);
+	mileage = mile;
+	fuelEconomy = fEconomy;
+}
+
+Odometer::Odometer(const Odometer& oMeter){
+	fGauge = oMeter.fGauge;
+	mileage = oMeter.mileage;
+	fuelEconomy = oMeter.fuelEconomy;
+}
+
+int Odometer::reportMileage() {
+	return mileage;
+}
+
+int Odometer::reportFuel() {
+	return fGauge.reportFuelLevel();
+}
+
+void Odometer::fillFuel() {
+	int max = fGauge.reportMaxFuel();
+	int current = fGauge.reportFuelLevel();
+	cout << "Current Mileage: " << mileage << endl;
+	cout << "Current Fuel: " << fGauge.reportFuelLevel() << endl;
+	for (int i = current; i < max; i++) {
+		fGauge.incrementFuel();
+		cout << "Current Mileage: " << mileage << endl;
+		cout << "Current Fuel: " << fGauge.reportFuelLevel() << endl;
+	}
+}
+
+void Odometer::driveMile() {
+	mileage++;
+	if (mileage > 999999) {
+		mileage = 0;
+	}
+	if (mileage % fuelEconomy == 0) {
+		fGauge.decrementFuel();
+	}
+	cout << "Current Mileage: " << mileage << endl;
+	cout << "Current Fuel: " << fGauge.reportFuelLevel() << endl;
+}
+
+int main() {
+	Odometer tester = Odometer(0, 15, 0, 24);
+	tester.fillFuel();
+	int current = tester.reportFuel();
+	while (current > 0) {
+		tester.driveMile();
+		current = tester.reportFuel();
+	}
+	system("pause");
+	return 0;
+}

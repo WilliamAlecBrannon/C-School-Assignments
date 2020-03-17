@@ -1,0 +1,50 @@
+William Brannon
+Assignment 1: Pointers
+Testing Results:
+How long would you like the array to be?
+20
+
+51,90,26,23,63,
+20,67,46,80,12,
+45,48,44,70,89,
+15,89,45,58,19,
+Press any key to continue . . .
+Source Code:
+//Assignment 1 Pointers
+//By William Brannon 
+//8/27/18
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+int *makeArray(int size) {
+	return new int[size];
+}
+
+void fillArray(int numbers[], int arrayLength) {
+	for (int i = 0; i < arrayLength; i++) {
+		numbers[i] = rand() % 81 + 10;
+	}
+}
+
+int main() {
+	cout << "How long would you like the array to be?" << endl;
+	int temp;
+	cin >> temp;
+	int* scores = makeArray(temp);
+	fillArray(scores,temp);
+	int counter = 0;
+	for (int i = 0; i < temp; i++) {
+		if (counter % 5 == 0) {
+			cout << endl;
+		}
+		cout << scores[i] << ",";
+		counter++;
+	}
+	cout << endl;
+	delete[] scores;
+	system("pause");
+	return 0;
+}

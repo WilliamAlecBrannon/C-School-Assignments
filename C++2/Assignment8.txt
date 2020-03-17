@@ -1,0 +1,145 @@
+William Brannon
+Assignment 8: Class Composition
+Testing Results:
+Time Report:
+Sick days Taken: 0/5
+Sick hours Taken: 0/40
+Vacation days Taken: 0/20
+Vacation hours Taken: 0/160
+Time Report:
+Sick days Taken: 0/5
+Sick hours Taken: 0/40
+Vacation days Taken: 7/20
+Vacation hours Taken: 56/160
+Time Report:
+Sick days Taken: 7/5
+Sick hours Taken: 56/40
+Employee has exceeded their alloted number of sick days.
+Vacation days Taken: 7/20
+Vacation hours Taken: 56/160
+Press any key to continue . . .
+Source Code:
+// Assignment 8 : Class Composition
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class NumDays {
+private:
+	int Hours;
+	int Days;
+	int DayHourRatio;
+public:
+	NumDays(const int = 0, const int = 0, const int = 8);
+	NumDays(const NumDays&);
+	int getHours();
+	int getDays();
+	int getRatio();
+	void decrementDay();
+	void incrementDay();
+};
+
+NumDays::NumDays(const int h,const int d,const int r) {
+	Hours = h;
+	Days = d;
+	DayHourRatio = r;
+}
+
+NumDays::NumDays(const NumDays& nDays) {
+	Hours = nDays.Hours;
+	Days = nDays.Days;
+	DayHourRatio = nDays.DayHourRatio;
+}
+
+int NumDays::getHours() {
+	return Hours;
+}
+
+int NumDays::getDays() {
+	return Days;
+}
+
+int NumDays::getRatio() {
+	return DayHourRatio;
+}
+
+void NumDays::decrementDay(){
+	Days--;
+	Hours -= DayHourRatio;
+}
+
+void NumDays::incrementDay() {
+	Days++;
+	Hours += DayHourRatio;
+}
+
+class TimeOff {
+	private:
+		NumDays maxSickDays;
+		NumDays sickTaken;
+		NumDays maxVacationDays;
+		NumDays vacTaken;
+	public:
+		TimeOff(int maxSickD, int maxVacD, int ratio);
+		TimeOff(const TimeOff&);
+		void TakeSickDays(int dayNum);
+		void TakeVacDays(int dayNum);
+		void ReportTimeOff();
+};
+
+TimeOff::TimeOff(int maxSickD, int maxVacD, int ratio) {
+	maxSickDays = NumDays(maxSickD * ratio, maxSickD, ratio);
+	sickTaken = NumDays(0, 0, ratio);
+	maxVacationDays = NumDays(maxVacD * ratio, maxVacD, ratio);
+	vacTaken = NumDays(0, 0, ratio);
+}
+
+TimeOff::TimeOff(const TimeOff& tOff) {
+	maxSickDays = tOff.maxSickDays;
+	sickTaken = tOff.sickTaken;
+	maxVacationDays = tOff.maxVacationDays;
+	vacTaken = tOff.vacTaken;
+}
+
+void TimeOff::TakeSickDays(int dayNum) {
+	for (int i = 0; i < dayNum; i++) {
+		sickTaken.incrementDay();
+	}
+}
+
+void TimeOff::TakeVacDays(int dayNum) {
+	for (int i = 0; i < dayNum; i++) {
+		vacTaken.incrementDay();
+	}
+}
+
+void TimeOff::ReportTimeOff() {
+	cout << "Time Report: " << endl;
+	cout << "Sick days Taken: " << sickTaken.getDays() << "/" << maxSickDays.getDays() << endl;
+	cout << "Sick hours Taken: " << sickTaken.getHours() << "/" << maxSickDays.getHours() << endl;
+	if (sickTaken.getDays() > maxSickDays.getDays()) {
+		cout << "Employee has exceeded their alloted number of sick days." << endl;
+	}
+	cout << "Vacation days Taken: " << vacTaken.getDays() << "/" << maxVacationDays.getDays() << endl;
+	cout << "Vacation hours Taken: " << vacTaken.getHours() << "/" << maxVacationDays.getHours() << endl;
+	if (vacTaken.getDays() > maxVacationDays.getDays()) {
+		cout << "Employee has exceeded their alloted number of vacation days." << endl;
+	}
+}
+
+int main()
+{
+	TimeOff tester = TimeOff(5, 20, 8);
+	tester.ReportTimeOff();
+	//simulating employee taking a week of vacation
+	tester.TakeVacDays(7);
+	tester.ReportTimeOff();
+	//simulating employee taking a week of sick days
+	tester.TakeSickDays(7);
+	tester.ReportTimeOff();
+	system("pause");
+    return 0;
+}

@@ -1,0 +1,50 @@
+Exercise Document:
+Author: William Brannon
+Date: 03/26/2018
+Exercise 7: Rainfall Statistics
+CONSOLE OUTPUT/TESTING RESULTS:
+Enter the rainfall (in inches) for month #1: 1
+Enter the rainfall (in inches) for month #2: 0
+Enter the rainfall (in inches) for month #3: 2
+Enter the rainfall (in inches) for month #4: 3
+Enter the rainfall (in inches) for month #5: 4
+Enter the rainfall (in inches) for month #6: 5
+Enter the rainfall (in inches) for month #7: 3
+Enter the rainfall (in inches) for month #8: 2
+Enter the rainfall (in inches) for month #9: 1
+Enter the rainfall (in inches) for month #10: 4
+Enter the rainfall (in inches) for month #11: 5
+Enter the rainfall (in inches) for month #12: 1
+Press any key to continue . . .
+C++ SOURCE CODE:
+// Rainfall Statistics
+// By William Brannon 03/26/2018
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+//constant for the number of months
+const int NUM_MONTHS = 12;
+
+int main()
+{
+	//array to hold the rainfall data
+	double rainFall[NUM_MONTHS];
+
+	//get the rainfall for each month
+	for (int month = 0; month < NUM_MONTHS; month++) {
+		//get this month's rainfall
+		cout << "Enter the rainfall (in inches) for month #";
+		cout << (month + 1) << ": ";
+		cin >> rainFall[month];
+
+		//validate the value entered
+		while (rainFall[month] < 0) {
+			cout << "Rainfall must be 0 or more.\n"
+				 << "Please re-enter: ";
+			cin >> rainFall[month];
+		}
+	}
+    return 0;
+}

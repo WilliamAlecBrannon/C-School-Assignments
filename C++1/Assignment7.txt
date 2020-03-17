@@ -1,0 +1,73 @@
+Exercise Document:
+Author: William Brannon
+Date: 03/26/2018
+Assignment 7: Salsa Arrays
+CONSOLE OUTPUT/TESTING RESULTS:
+How many jars of mild were sold? 1
+How many jars of medium were sold? 5
+How many jars of sweet were sold? 3
+How many jars of hot were sold? 2
+How many jars of zesty were sold? 4
+Type of Salsa Number of sales
+mild          1
+medium        5
+sweet         3
+hot           2
+zesty         4
+Total Sales   15
+Best selling: medium
+Worst selling: mild
+Press any key to continue . . .
+C++ SOURCE CODE:
+// Assignment 7: Chips and Salsa Arrays
+// By William Brannon
+// 03/26/2018
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+string salsa[5] = { "mild","medium","sweet","hot","zesty"};
+int salsaSales[5];
+
+int main()
+{
+	for (int i = 0; i < 5; i++) {
+		cout << "How many jars of " << salsa[i] << " were sold? ";
+		cin >> salsaSales[i];
+		while (salsaSales[i] < 0) {
+			cout << "Sales must be 0 or more.\n" << "Please re-enter: ";
+			cin >> salsaSales[i];
+		}
+	}
+	cout << left;
+	cout << setw(14) << "Type of Salsa" << setw(15) << "Number of sales" << '\n' <<
+		setw(14) << salsa[0] << setw(15) << salsaSales[0] << '\n' <<
+		setw(14) << salsa[1] << setw(15) << salsaSales[1] << '\n' <<
+		setw(14) << salsa[2] << setw(15) << salsaSales[2] << '\n' <<
+		setw(14) << salsa[3] << setw(15) << salsaSales[3] << '\n' <<
+		setw(14) << salsa[4] << setw(15) << salsaSales[4] << '\n';
+	int total = salsaSales[0] + salsaSales[1] + salsaSales[2] + salsaSales[3] + salsaSales[4];
+	cout << setw(14) << "Total Sales" << setw(15) << total << '\n';
+	int highest = 0;
+	int highestIndex = 0;
+	for (int i = 0; i < 5; i++) {
+		if (salsaSales[i] > highest) {
+			highest = salsaSales[i];
+			highestIndex = i;
+		}
+	}
+	cout << setw(14) << "Best selling: " << setw(14) << salsa[highestIndex] << '\n';
+	int lowest = INT_MAX;
+	int lowestIndex = 0;
+	for (int i = 0; i < 5; i++) {
+		if (salsaSales[i] < lowest) {
+			lowest = salsaSales[i];
+			lowestIndex = i;
+		}
+	}
+	cout << setw(15) << "Worst selling: " << setw(13) << salsa[lowestIndex] << '\n';
+    return 0;
+}

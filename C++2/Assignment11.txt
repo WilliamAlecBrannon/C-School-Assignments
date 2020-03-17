@@ -1,0 +1,121 @@
+William Brannon
+Assignment 11: Template Functions
+Chapter 16 Programming Challenge:
+#3 Minimum/Maximum Templates
+Testing Results:
+7
+7
+z
+3
+3
+a
+Press any key to continue . . .
+Source Code:
+// Assignment 11: Template Functions
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+T maximum(T x, T y)
+{
+	return (x > y) ? x : y;
+}
+
+template <typename T>
+T minimum(T x, T y)
+{
+	return (x < y) ? x : y;
+}
+
+int main()
+{
+	cout << maximum<int>(3, 7) << endl;
+	cout << maximum<double>(3.0, 7.0) << endl;
+	cout << maximum<char>('z', 'a') << endl;
+	cout << minimum<int>(3, 7) << endl;
+	cout << minimum<double>(3.0, 7.0) << endl;
+	cout << minimum<char>('z', 'a') << endl;
+	system("pause");
+    return 0;
+}
+#4 Absolute Value Template
+Testing Results:
+3
+5
+g
+Press any key to continue . . .
+Source Code:
+// Assignment 11: Template Functions
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+template <typename AV>
+AV absolute(AV a)
+{
+	return (a > 0 ? a : a * -1);
+}
+
+int main()
+{
+	cout << absolute<int>(-3) << endl;
+	cout << absolute<double>(-5.0) << endl;
+	cout << absolute<char>('g') << endl;
+	system("pause");
+    return 0;
+}
+#5 Total Template
+Testing Results:
+How many numbers would you like to total?
+3
+6
+5
+2
+13
+How many numbers would you like to total?
+3
+6
+5
+7
+18
+Press any key to continue . . .
+Source Code:
+// Assignment 11: Template Functions
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+T total(T num)
+{
+	T total = 0;
+	T temp;
+	for (int i = 0; i < num; i++) {
+		cin >> temp;
+		total += temp;
+	}
+	return total;
+}
+
+int main()
+{
+	int tempNum;
+	cout << "How many numbers would you like to total?" << endl;
+	cin >> tempNum;
+	cout << total<int>(tempNum) << endl;
+	cout << "How many numbers would you like to total?" << endl;
+	cin >> tempNum;
+	cout << total<double>((double)tempNum) << endl;
+	system("pause");
+    return 0;
+}

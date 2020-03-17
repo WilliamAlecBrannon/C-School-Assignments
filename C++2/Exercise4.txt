@@ -1,0 +1,34 @@
+William Brannon
+Exercise 4: Class Constructors
+Chapter 13
+Short Answer
+#10: Constructors are member functions with the same name as the class which initialize objects of the class. A Destructor is a member function which deletes an object.
+#11: A default constructor is a constructor which does not take parameters. It is technically possible to write more than one default constructor but you will get an error because the program has no way of knowing which one is valid.
+#12: A class can have multiple constructors so long as their parameters are not the same. A destructor does not take parameters and thus you can have only one destructor per class.
+#13: If an object is dynamically generated at runtime, its constructor runs when the object is created.
+#14: In c++ 11, when defining an array of class objects you can pass the arguments to the constructor by surrounding the definition in curly brackets, and then surrounding each set of arguments per instance of the class in another pair of curly brackets.
+Algorithm Workbench
+#44 & #45:
+class Circle {
+	int radius;
+public:
+	//#44
+	Circle(){
+		radius = 0;
+	};
+	//#45
+	Circle(int a) {
+		radius = a;
+	};
+	void setRadius(int a) {
+		radius = a;
+	}
+	int getRadius() {
+		return radius;
+	}
+	float getArea() { return (3.14159 * radius * radius); }
+};
+#46:
+Circle *circ = new Circle[5];
+#47:
+Circle circles[5] = {{12},{7},{9},{14},{8}};

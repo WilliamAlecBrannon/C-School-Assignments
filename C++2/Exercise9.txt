@@ -1,0 +1,231 @@
+William Brannon
+Exercise 9: Inheritance
+Chapter 15
+Programming Challenge #4: Time Format
+Testing Results:
+Please provide number of hours in military time.
+1630
+Please provide number of seconds in military time.
+45
+Military Time: 1630:45
+Standard Time: 4:30:45
+Press any key to continue . . .
+Source Code:
+// Exercise 9 : Inheritance
+// By William Brannon
+
+#include "stdafx.h"
+#include "Time.h"
+#include <iostream>
+
+using namespace std;
+
+class MilTime : public Time {
+private:
+	int milHours;
+	int milSeconds;
+public:
+	MilTime(int mHour = 0, int mSeconds = 0) {
+		if ((mHour >= 0) && (mHour < 2400) && ((mHour % 100) < 60) &&(mSeconds >= 0) && (mSeconds < 60)) {
+			milHours = mHour;
+			milSeconds = mSeconds;
+			hour = mHour / 100;
+			min = mHour % 100;
+			sec = mSeconds;
+			if (hour > 12) {
+				hour -= 12;
+			}
+		}
+		else {
+			milHours = 0;
+			milSeconds = 0;
+			hour = 0;
+			min = 0;
+			sec = 0;
+		}
+	}
+	MilTime(const MilTime& mTime) {
+		milHours = mTime.milHours;
+		milSeconds = mTime.milSeconds;
+		hour = mTime.hour;
+		min = mTime.sec;
+	}
+	void setTime(int mHour, int mSeconds) {
+		if ((mHour >= 0) && (mHour < 2400) && ((mHour % 100) < 60) && (mSeconds >= 0) && (mSeconds < 60)) {
+			milHours = mHour;
+			milSeconds = mSeconds;
+			hour = mHour / 100;
+			min = mHour % 100;
+			sec = mSeconds;
+			if (hour > 12) {
+				hour -= 12;
+			}
+		}
+	}
+	int getHour() {
+		return milHours;
+	}
+	int getStandHour() {
+		return hour;
+	}
+	void printMilTime() {
+		cout << "Military Time: " << milHours << ":" << milSeconds << endl;
+	}
+	void printStandardTime() {
+		cout << "Standard Time: " << hour << ":" << min << ":" << sec << endl;
+	}
+};
+
+int main()
+{
+	MilTime timer = MilTime();
+	int tempHour;
+	int tempSec;
+	cout << "Please provide number of hours in military time." << endl;
+	cin >> tempHour;
+	cout << "Please provide number of seconds in military time." << endl;
+	cin >> tempSec;
+	timer.setTime(tempHour, tempSec);
+	timer.printMilTime();
+	timer.printStandardTime();
+	system("pause");
+    return 0;
+}
+Programming Challenge #5: Time Clock
+Testing Results:
+Please provide the start time in military hours.
+1630
+Please provide the end time in military hours.
+1900
+Standard Time: 4:30:0
+Standard Time: 7:0:0
+The difference between the times is:
+Military Time: 230:0
+Standard Time: 2:30:0
+Press any key to continue . . .
+Source Code:
+// Exercise 9 : Inheritance
+// By William Brannon
+
+#include "stdafx.h"
+#include "Time.h"
+#include <iostream>
+
+using namespace std;
+
+class MilTime : public Time {
+private:
+	int milHours;
+	int milSeconds;
+public:
+	MilTime(int mHour = 0, int mSeconds = 0) {
+		if ((mHour >= 0) && (mHour < 2400) && ((mHour % 100) < 60) &&(mSeconds >= 0) && (mSeconds < 60)) {
+			milHours = mHour;
+			milSeconds = mSeconds;
+			hour = mHour / 100;
+			min = mHour % 100;
+			sec = mSeconds;
+			if (hour > 12) {
+				hour -= 12;
+			}
+		}
+		else {
+			milHours = 0;
+			milSeconds = 0;
+			hour = 0;
+			min = 0;
+			sec = 0;
+		}
+	}
+	MilTime(const MilTime& mTime) {
+		milHours = mTime.milHours;
+		milSeconds = mTime.milSeconds;
+		hour = mTime.hour;
+		min = mTime.sec;
+	}
+	void setTime(int mHour, int mSeconds) {
+		if ((mHour >= 0) && (mHour < 2400) && ((mHour % 100) < 60) && (mSeconds >= 0) && (mSeconds < 60)) {
+			milHours = mHour;
+			milSeconds = mSeconds;
+			hour = mHour / 100;
+			min = mHour % 100;
+			sec = mSeconds;
+			if (hour > 12) {
+				hour -= 12;
+			}
+		}
+	}
+	int getHour() {
+		return milHours;
+	}
+	int getStandHour() {
+		return hour;
+	}
+	void printMilTime() {
+		cout << "Military Time: " << milHours << ":" << milSeconds << endl;
+	}
+	void printStandardTime() {
+		cout << "Standard Time: " << hour << ":" << min << ":" << sec << endl;
+	}
+};
+
+class TimeClock : public MilTime{
+private:
+	MilTime start;
+	MilTime end;
+public:
+	TimeClock(const int startHour = 0, const int endHour = 0) {
+		if ((startHour >= 0) && (startHour < 2400)) {
+			start = MilTime(startHour, 0);
+		}
+		if ((endHour >= 0) && (endHour < 2400)) {
+			end = MilTime(endHour, 0);
+		}
+	}
+	TimeClock(const TimeClock& tClock) {
+		start = tClock.start;
+		end = tClock.end;
+	}
+	void getDifference() {
+		start.printStandardTime();
+		end.printStandardTime();
+		int temp = 0;
+		int tempStartStandHour = start.getStandHour();
+		int tempEndStandHour = end.getStandHour();
+		int tempStartStandMinute = start.getMin();
+		int tempEndStandMinute = end.getMin();
+		if (tempStartStandMinute > tempEndStandMinute) {
+			tempEndStandMinute += 60;
+			int tempMinDif = tempEndStandMinute - tempStartStandMinute;
+			int tempHourDif = tempEndStandHour - tempStartStandHour;
+			tempHourDif -= 1;
+			temp = (tempHourDif * 100) + tempMinDif;
+
+		}
+		else {
+			int tempMinDif = tempEndStandMinute - tempStartStandMinute;
+			int tempHourDif = tempEndStandHour - tempStartStandHour;
+			temp = (tempHourDif * 100) + tempMinDif;
+		}
+		//everything past this works
+		MilTime tempTime = MilTime(temp, 0);
+		cout << "The difference between the times is: " << endl;
+		tempTime.printMilTime();
+		tempTime.printStandardTime();
+	}
+};
+
+int main()
+{
+	TimeClock timer;
+	int startNum;
+	int endNum;
+	cout << "Please provide the start time in military hours." << endl;
+	cin >> startNum;
+	cout << "Please provide the end time in military hours." << endl;
+	cin >> endNum;
+	timer = TimeClock(startNum, endNum);
+	timer.getDifference();
+	system("pause");
+    return 0;
+}

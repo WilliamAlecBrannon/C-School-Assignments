@@ -1,0 +1,18 @@
+William Brannon
+Exercise 1: Pointers
+Chapter 9 Algorithm Workbench
+#26: 
+int* numbers = new int[20];
+for (int i = 0; i < 20; i++){
+    cout << "Please provide the number for index " << i << endl;
+    int num;
+    cin >> num;
+    numbers[i] = num;
+}
+#27:
+delete [] tempNumbers;
+tempNumbers = nullptr;
+#29:
+const int *ptr;
+#30:
+int *const ptr;

@@ -1,0 +1,268 @@
+William Brannon
+Assignment 7: Dynamic Arrays
+Testing Results:
+The Standard Deviation is 35.2893
+Valid Scores for the Band Pass Filter: 86,88,51,57,62,89,99,59,71,93,94,78,86,72,94,88,72,59,56,49,68,89,83,86,57,51,50,57,51,60,60,99,88,47,66,77,64,80,56,83,76,56,63,82,78,61,66,84,74,81,56,81,59,98,90,80,88,98,78,95,97,56,59,95,53,79,69,83,45,69,51,50,87,54,55,
+75 scores passed through the filter.
+This is 100 % of the total scores
+A normal distribution has 68.2% of data within one standard deviation of the mean.
+Our data has a 31.8 % difference.
+Press any key to continue . . .
+Source Code:
+// Assignment 7 : Dynamic Arrays
+// By William Brannon
+
+#include "stdafx.h"
+#include <math.h> 
+#include <iostream>
+
+using namespace std;
+
+class Array2D
+{
+private:
+	int* ptr;
+	int rowSize; //number of rows
+	int colSize; //number of columns
+	int size; //size of the array
+public:
+	Array2D(int = 3, int = 3);
+	Array2D(const Array2D&);
+	int getRowSize() const;
+	int getColSize() const;
+	int getArraySize() const;
+	//function call operator for non - const objects , returns(modifiable) Lvalue
+	int& operator()(int, int);
+	//function call operator for const objects, returns(read - only) Rvalue
+	int operator()(int, int) const;
+	//return a copy of the data values for row
+	int* operator()(int row);
+	//return a copy of all the data as a 1D vector
+	int* operator()();
+};
+
+Array2D::Array2D(int rSize, int cSize)
+{
+	rowSize = rSize > 0 ? rSize : 3;
+	colSize = cSize > 0 ? cSize : 3;
+	size = rowSize * colSize;
+	ptr = new int[size];
+	for (int i = 0; i != size; ptr[i++] = 0);
+}
+
+Array2D::Array2D(const Array2D& arr) : size(arr.size)
+{
+	ptr = new int[size];
+	for (int i = 0; i != size; i++) {
+		ptr[i] = arr.ptr[i];
+	}
+}
+
+int Array2D::getRowSize() const
+{
+	return this->rowSize;
+}
+
+int Array2D::getColSize() const
+{
+	return this->colSize;
+}
+
+int Array2D::getArraySize() const
+{
+	return this->size;
+}
+
+int& Array2D::operator()(int row, int col)
+{
+	//row & col should be 0-indexed to work in the formula
+	//Since we are assuming they will be 1-indexed we need to fix the input
+	int r = row - 1;
+	int c = col - 1;
+
+	//Checking for whether the input is a valid subscript into the array
+	if ((r < 0 || r >= rowSize) || (c < 0 || c >= colSize)) {
+		throw "Subscript out of range";
+	}
+	
+	//returns Lvalue for this element
+	return ptr[(r * colSize) + c];
+}
+
+int Array2D::operator()(int row, int col) const
+{
+	//row & col should be 0-indexed to work in the formula
+	//Since we are assuming they will be 1-indexed we need to fix the input
+	int r = row - 1;
+	int c = col - 1;
+
+	//Checking for whether the input is a valid subscript into the array
+	if ((r < 0 || r >= rowSize) || (c < 0 || c >= colSize)) {
+		throw "Subscript out of range";
+	}
+
+	//returns Rvalue for this element
+	return ptr[(r * colSize) + c];
+}
+
+int* Array2D::operator()(int row)
+{
+	//row should be 0-indexed to work in the formula
+	//Since we are assuming it will be 1-indexed we need to fix the input
+	int r = row - 1;
+
+	//Checking for whether the input is a valid subscript into the array
+	if (r < 0 || r >= rowSize) {
+		throw "Subscript out of range";
+	}
+
+	int col = getColSize();
+
+	int* rPtr = 0; //position of row
+	int* cPtr = new int[col]; //pointer to a copy of the row data
+	rPtr = ptr + (r * col);
+	
+	//copy data
+	for (int i = 0; i != this->colSize; i++) {
+		cPtr[i] = rPtr[i];
+	}
+	return cPtr; //pointer to object on the heap
+}
+
+int* Array2D::operator()()
+{
+	//pointer to a copy of data values
+	int* cPtr = new int[size];
+	//copy data to vector object on the heap
+	for (int i = 0; i < size; i++) {
+		cPtr[i] = ptr[i];
+	}		
+	return cPtr; //return pointer(reference) to a copy
+}
+
+class TestScores
+{
+private:
+	Array2D scores;
+	int size;
+public:
+	TestScores(int = 3, int = 3);
+	TestScores(const TestScores&);
+	//set score value for given subscript
+	void setValue(int StudentNum, int TestNum, int val);
+	//gets the scores for a given student
+	int* getScoresRow(int StudentNum);
+	//gets the average for a given student's test scores
+	float AverageScoreForStudent(int StudentNum);
+	//returns the class average
+	float AverageScoreForClass();
+	//gets the standard deviation for the class' scores
+	float StandardDeviation();
+	//Only allows scores to pass through if they are within one standard deviation from the mean
+	void BandPassFilter();
+};
+
+TestScores::TestScores(int rSize, int cSize)
+{
+	//initializes the testScores class based on array size;
+	scores = Array2D(rSize, cSize);
+	size = rSize * cSize;
+}
+
+TestScores::TestScores(const TestScores& testSc) : size(testSc.size)
+{
+	//copies the internal data from one instance of TestScores to another
+	scores = testSc.scores;
+	size = testSc.size;
+}
+
+void TestScores::setValue(int StudentNum, int TestNum, int val) {
+	scores(StudentNum, TestNum) = val;
+}
+
+int* TestScores::getScoresRow(int StudentNum)
+{
+	int* temp = scores(StudentNum);
+	return temp;
+}
+
+float TestScores::AverageScoreForStudent(int StudentNum)
+{
+	//temporary storage of the student's test scores
+	int* temp = scores(StudentNum);
+	//number of tests the student has taken
+	int tempNum = scores.getColSize();
+	//total of the student's grades before division to get average
+	float tempTotal = 0;
+	for (int i = 0; i < tempNum; i++) {
+		tempTotal = tempTotal + temp[i];
+	}
+	return (tempTotal / tempNum);
+}
+
+float TestScores::AverageScoreForClass() {
+	//gets the number of students
+	int tempNum = scores.getRowSize();
+	float tempTotal = 0;
+	for (int i = 1; i <= tempNum; i++) {
+		tempTotal += AverageScoreForStudent(i);
+	}
+	return (tempTotal / tempNum);
+}
+
+float TestScores::StandardDeviation() {
+	//gets the number of students
+	int tempNum = scores.getRowSize();
+	//gets the class average
+	float classAverage = AverageScoreForClass();
+	//temporary copy of scores to do calculations with
+	int* tempArray = scores();
+	//value used for calculating the mean in step 3 of the standard deviation formula;
+	float tempTotal = 0;
+	for (int i = 0; i < size; i++) {
+		//copy of the value at that location so that it can be manipulated through calculations
+		int temp = tempArray[i];
+		//second step of standard deviation formula. subtracting the mean from each number and then squaring the result
+		tempArray[i] = int(pow((temp - classAverage),2));
+		tempTotal += tempArray[i];
+	}
+	//the last two steps of the standard deviation formula. calculating the mean of the new values and then taking the sqrt of that
+	return sqrt(tempTotal / tempNum);
+}
+
+void TestScores::BandPassFilter() {
+	double sd = StandardDeviation();
+	double classAverage = AverageScoreForClass();
+	int* tempArray = scores();
+	double numValidScores = 0;
+	cout << "The Standard Deviation is " << sd << endl;
+	cout << "Valid Scores for the Band Pass Filter: ";
+	for (int i = 0; i < size; i++) {
+		if (tempArray[i] > (classAverage + sd) || tempArray[i] < (classAverage - sd)) {
+		}
+		else {
+			cout << tempArray[i] << ",";
+			numValidScores++;
+		}
+	}
+	cout << endl;
+	cout << numValidScores << " scores passed through the filter." << endl;
+	cout << "This is " << ((numValidScores / size) * 100) << " % of the total scores" << endl;
+	cout << "A normal distribution has 68.2% of data within one standard deviation of the mean." << endl;
+	cout << "Our data has a " << (((numValidScores / size) * 100) - 68.2f) << " % difference." << endl;
+}
+
+int main()
+{
+	TestScores tester = TestScores(15, 5);
+	for (int i = 1; i <= 15; i++) {
+		for (int j = 1; j <= 5; j++) {
+			//random score value between 45 and 100
+			int tempNum = rand() % 56 + 45;
+			tester.setValue(i, j, tempNum);
+		}
+	}
+	tester.BandPassFilter();
+	system("pause");
+    return 0;
+}

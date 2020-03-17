@@ -1,0 +1,57 @@
+William Brannon
+Assignment 5: Exceptions
+Testing Results:
+46
+Press any key to continue . . .
+Source Code:
+// Assignment 5 : Exceptions
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class TestScores {
+	int* scores;
+public:
+	TestScores(int a[],int size) {
+		try
+		{
+			scores = new int[size];
+			for (int i = 0; i < size; i++) {
+				scores[i] = a[i];
+				if (scores[i] > 100 || scores[i] < 0) {
+					throw "Invalid input";
+				}
+			}
+		}
+		catch (...)
+		{
+			cout << "An exception occurred due to invalid input." << endl;
+		}
+	};
+	int getAverage(int size) {
+		int total = 0;
+		for (int i = 0; i < size; i++) {
+			total += scores[i];
+		}
+		return total / size;
+	}
+	void printScores(int size) {
+		for (int i = 0; i < size; i++) {
+			cout << scores[i] << endl;
+		}
+	}
+};
+
+
+int main()
+{
+	int grades[5] = { 16, 2, 77, 40, 99 };
+	int num = sizeof(grades) / sizeof(grades[0]);
+	TestScores tester = { grades,num };
+	cout << tester.getAverage(num) << endl;
+	system("pause");
+	return 0;
+}

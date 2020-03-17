@@ -1,0 +1,139 @@
+William Brannon
+Assignment 3: Class Construct
+Testing Results:
+What day would you like to use? (Int)
+29
+What month would you like to use? (Int)
+8
+What year would you like to use? (Int)
+2018
+What format would you like to use? (Int, 1-indexed)
+1
+8/29/2018
+Press any key to continue . . .
+Source Code:
+// Assignment 3 Class Construct
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Date {
+	int day, month, year;
+public:
+	bool set_values(int, int, int);
+	int getDay() { return day; }
+	int getMonth() { return month; }
+	int getYear() { return year; }
+	string printDate(int,int);
+};
+
+bool Date::set_values(int x, int y, int z) {
+	if (x > 30 || x < 1 || y > 12 || y < 1 || z > 2025 || z < 1900) {
+		return false;
+	}
+	else {
+		day = x;
+		month = y;
+		year = z;
+		return true;
+	};
+}
+
+string Date::printDate(int x, int y) {
+	string output = "";
+	string monthName = "";
+	switch (y) {
+		case 1:
+			monthName = "January";
+			break;
+		case 2:
+			monthName = "February";
+			break;
+		case 3:
+			monthName = "March";
+			break;
+		case 4:
+			monthName = "April";
+			break;
+		case 5:
+			monthName = "May";
+			break;
+		case 6:
+			monthName = "June";
+			break;
+		case 7:
+			monthName = "July";
+			break;
+		case 8:
+			monthName = "August";
+			break;
+		case 9:
+			monthName = "September";
+			break;
+		case 10:
+			monthName = "October";
+			break;
+		case 11:
+			monthName = "November";
+			break;
+		case 12:
+			monthName = "December";
+			break;
+		default:
+			monthName = "";
+	}
+	switch (x) {
+		case 1:
+			output += to_string(month) + "/" + to_string(day) + "/" + to_string(year);
+			return output;
+		case 2:
+			output += monthName + " " + to_string(day) + ", " + to_string(year);
+			return output;
+		case 3:
+			output += to_string(day) + " " + monthName + " " + to_string(year);
+			return output;
+		default:
+			output += "Invalid input";
+			return output;
+	}
+}
+
+int main() {
+	Date time;
+	int day;
+	int month;
+	int year;
+	int format;
+	cout << "What day would you like to use? (Int)" << endl;
+	cin >> day;
+	cout << "What month would you like to use? (Int)" << endl;
+	cin >> month;
+	cout << "What year would you like to use? (Int)" << endl;
+	cin >> year;
+	bool set = time.set_values(day, month, year);
+	while (!set) {
+		cout << "Invalid Input" << endl;
+		cout << "What day would you like to use? (Int)" << endl;
+		cin >> day;
+		cout << "What month would you like to use? (Int)" << endl;
+		cin >> month;
+		cout << "What year would you like to use? (Int)" << endl;
+		cin >> year;
+		set = time.set_values(day, month, year);
+	}
+	cout << "What format would you like to use? (Int, 1-indexed)" << endl;
+	cin >> format;
+	while (format > 3 || format < 1 ) {
+		cout << "Invalid Input" << format << endl;
+		cout << "What format would you like to use? (Int, 1-indexed)" << endl;
+		cin >> format;
+	}
+	string message = time.printDate(format,time.getMonth());
+	cout << message << endl;
+	system("pause");
+	return 0;
+}

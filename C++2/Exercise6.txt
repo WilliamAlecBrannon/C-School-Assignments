@@ -1,0 +1,22 @@
+William Brannon
+Exercise 6: Operator Overloading
+Chapter 14
+Short Answer
+#1: An instance member variable's values are unique to that object's instance of the class. A static member variable shares its value and memory location across all instances of a class.
+#2: Numbers::showTotal();
+#3: Static member variables are defined outside of the class declaration, though the declaration is within the class.
+#4: Friend functions are not part of a class but are treated as though they are members of it, and as such have access to private variables.
+#5: It is bad practice to make two classes friends of each other because it is bad data security because the friend class would have access to all private member variables of the other class.
+#6: Memberwise assignment is the act of assigning the data of one object to another object of the same class, or initializing an object using such data.
+#9: Memberwise assignment is not desirable when a class has functions which are only useful within the class and involve manipulating the creation and destruction of data that would be bad if called at an inappropriate time somewhere else in the code.
+#12: It is more convenient to use overloaded operators which manipulate data in a way which is similar to primative data types, than it would be to call a function that serves a similar purpose.
+#13: The parameter passed to an operator= function is the right side of the = operator in the statement in which the function was called.
+#14: If a class's overloaded operator function for the = operator were given a void return type, you could not do multiple assignments in one line.
+#15: If the operator does not have a paramter, it is postfix. Otherwise, it is prefix.
+#16: "this" is a built-in pointer available to a class's functions which allow them to access the instance of the class calling the function.
+#17: Overloaded relational operators return boolean values.
+#19: To make a member variable static, you need to use the static keyword within the declaration in the class and then define the variable outside of the class.
+#20: To make a member function static, you need to use the static keyword within the declaration in the class and then define the static variables outside of the class.
+#22: Class aggregation involves making one class a member of another class. Making a class a friend of another class gives it the ability to access private member variables of the other class, as though it were part of the class, but there is no formal connection.
+#23: The purpose of a forward declaration is to inform the compiler about something's existence before it reaches the definition.
+#24: Memberwise functions involving pointers can cause problems because both objects are pointing to the same section of memory. This means they can both manipulate that data at any time and also can destroy the data but the other object would still be pointing to that null memory.

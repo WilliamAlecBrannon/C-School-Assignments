@@ -1,0 +1,42 @@
+William Brannon
+Exercise 2: Structured Data
+Chapter 11 Algorithm Workbench
+#23: 
+struct TempScale {
+	double fahrenheit;
+	double centigrade;
+};
+
+struct Reading {
+	int windSpeed;
+	double humidity;
+	TempScale temperature;
+};
+
+Reading read;
+#24:
+read = { 37,32,{32,0} };
+#25:
+void showReading(Reading reader) {
+	cout << "Wind Speed: " << reader.windSpeed << " mph" << endl;
+	cout << "Humidity: " << reader.humidity << "%" << endl;
+	cout << "Fahrenheit temperature: " << reader.temperature.fahrenheit << " degrees" << endl;
+	cout << "Centigrade temperature: " << reader.temperature.centigrade << " degrees" << endl;
+};
+#27:
+Reading getReading() {
+	Reading temp;
+	cout << "What is the windspeed in mph?" << endl;
+	cin >> temp.windSpeed;
+	cout << "What is the humidity percentage?" << endl;
+	cin >> temp.humidity;
+	cout << "What is the fahrenheit temperature?" << endl;
+	cin >> temp.temperature.fahrenheit;
+	cout << "What is the centigrade temperature?" << endl;
+	cin >> temp.temperature.centigrade;
+	return temp;
+};
+#29:
+rptr->windSpeed = 50;
+#30:
+strPtr->num = 10;

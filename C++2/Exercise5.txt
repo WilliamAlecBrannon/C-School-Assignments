@@ -1,0 +1,50 @@
+William Brannon
+Exercise 5: Exceptions
+Chapter 16
+Short Answer
+#1: A throw point is the line containing a throw statement.
+#2: An exception handler is a section of the code which is run in response to a throw statement, and denoted via a catch statement, which handles when exceptions occur.
+#3: A try block is the main body of the code you are trying to protect from exceptions, and the catch statement is the section which handles responding to the situation which arises if an exception happens inside of the try block.
+#4: If an exception is thrown but not caught, the throw propagates up the call stack and if it cannot find an appropriate catch statement, the program will be terminated.
+#5: Stack unwinding is the process of destroying local variables when they are no longer needed;
+#6: The behavior for what happens if an exception is thrown by a class’s member function is dependent on which type of member function is occuring. If it happens during a constructor or destructor, the object is only partially created or partially destroyed, and needs to be handled accordingly later.
+#7: You can prevent a program from halting when the new operator fails to allocate by wrapping the code in a trycatch statement using the bad_alloc exception.
+Algorithm Workbench
+#24:
+// Exercise 5
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+void findNumberInArray(int *arr, int size, int search) {
+	try
+	{
+		bool found = false;
+		for (int i = 0; i < size; i++) {
+			if (arr[i] == search) {
+				cout << i << endl;
+				found = true;
+			}
+		}
+		if (!found) {
+			throw "No number found";
+		}
+	}
+	catch (...)
+	{
+		cout << "The number was not found in the array." << endl;
+	}
+};
+
+
+int main()
+{
+	int testNumbers[] = { 4,3,5,6,7 };
+	int num = sizeof(testNumbers) / sizeof(testNumbers[0]);
+	findNumberInArray(testNumbers, num, 8);
+	system("pause");
+    return 0;
+}

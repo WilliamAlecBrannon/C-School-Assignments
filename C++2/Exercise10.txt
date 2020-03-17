@@ -1,0 +1,98 @@
+William Brannon
+Exercise 10: Virtual Functions
+Chapter 15
+Programming Challenge: #12 Ship, CruiseShip, and CargoShip Classes
+Testing Results:
+This ship is named La Nina and it was made in the year 1492.
+This ship is named La Pinta and it can hold 26 passengers.
+This ship is named La Santa Maria and it can hold 42 tons of cargo.
+Press any key to continue . . .
+Source Code:
+// Exercise 10: Virtual Functions
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Ship {
+protected:
+	string shipName;
+	string buildYear;
+public:
+	Ship(string a = "", string b = "") {
+		shipName = a;
+		buildYear = b;
+	}
+	void setShipName(string a) {
+		shipName = a;
+	}
+	string getShipName() {
+		return shipName;
+	}
+	void setBuildYear(string a) {
+		buildYear = a;
+	}
+	string getBuildYear() {
+		return buildYear;
+	}
+	virtual void print() {
+		cout << "This ship is named " << shipName << " and it was made in the year " << buildYear << "." << endl;
+	}
+};
+
+class CruiseShip : public Ship {
+protected:
+	int maxPassengers;
+public:
+	CruiseShip(string a = "", string b = "", int c = 0) {
+		shipName = a;
+		buildYear = b;
+		maxPassengers = c;
+	}
+	void setMaxPassengers(int a) {
+		maxPassengers = a;
+	}
+	int getMaxPassengers() {
+		return maxPassengers;
+	}
+	void print() {
+		cout << "This ship is named " << shipName << " and it can hold " << maxPassengers << " passengers." << endl;
+	}
+};
+
+class CargoShip : public Ship {
+protected:
+	int cargoCapacity;
+public:
+	CargoShip(string a = "", string b = "", int c = 0) {
+		shipName = a;
+		buildYear = b;
+		cargoCapacity = c;
+	}
+	void setCargoCapacity(int a) {
+		cargoCapacity = a;
+	}
+	int getCargoCapacity() {
+		return cargoCapacity;
+	}
+	void print() {
+		cout << "This ship is named " << shipName << " and it can hold " << cargoCapacity << " tons of cargo." << endl;
+	}
+};
+
+
+int main()
+{
+	Ship *ships[3];
+	ships[0] = new Ship("La Nina", "1492");
+	ships[1] = new CruiseShip("La Pinta", "1441",26);
+	ships[2] = new CargoShip("La Santa Maria", "1460",42);
+	for (int i = 0; i < (sizeof(ships) / sizeof(ships[0])); i++) {
+		ships[i]->print();
+	}
+	system("pause");
+    return 0;
+}

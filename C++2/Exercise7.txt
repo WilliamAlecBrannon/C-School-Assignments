@@ -1,0 +1,192 @@
+William Brannon
+Exercise 7: Dynamic Arrays
+Testing Results:
+Initial Array Size: 100
+Initial Array Data: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+What would you like to resize the first array to? 3
+Please provide values for the array
+7
+6
+8
+Current Array Size: 3
+Current Array Data: 7,6,8,
+There is a method in the class to compare data from one array to another.
+Current Size for the First Array: 3
+Current Data for the First Array: 7,6,8,
+Current Size for the Second Array: 100
+Current Data for the Second Array: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+The arrays are not the same.
+There is a method in the class to copy data from one array to another.
+Current Size for the First Array: 3
+Current Data for the First Array: 7,6,8,
+Current Size for the Second Array: 100
+Current Data for the Second Array: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Copying...Current Size for the First Array: 3
+Current Data for the First Array: 7,6,8,
+Current Size for the Second Array: 3
+Current Data for the Second Array: 7,6,8,
+Press any key to continue . . .
+Source Code:
+// Exercise7.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Array
+{
+private:
+	int* ptr;
+	int size;
+public:
+	Array(const int = 10);
+	Array(const Array&);
+	~Array();
+	int getSize() const;
+	const Array& operator=(const Array&);
+	bool operator==(const Array&);
+	int& operator[](const int);
+	int operator[](const int) const;
+	void resize(const int);
+	friend ostream& operator<<(ostream&, const Array&);
+	friend istream& operator>>(istream&, Array&);
+};
+
+Array::Array(const int arraySize)
+{
+	size = arraySize > 0 ? arraySize : 10;
+	ptr = new int[size];
+	for (int i = 0; i != size; ptr[i++] = 0);
+}
+
+Array::Array(const Array& arr) : size(arr.size)
+{
+	ptr = new int[size];
+	for (int i = 0; i != size; i++) {
+		ptr[i] = arr.ptr[i];
+	}
+}
+
+Array::~Array()
+{
+	delete[] ptr;
+}
+
+int Array::getSize() const
+{
+	return this->size;
+}
+
+const Array& Array::operator=(const Array& rhs)
+{
+	if (&rhs != this)
+	{
+		if (size != rhs.size)
+		{
+			delete[] ptr;
+			size = rhs.size;
+			ptr = new int[size];
+		}
+		for (int i = 0; i < size; i++) {
+			ptr[i] = rhs.ptr[i];
+		}	
+	}
+	return *this;
+}
+
+bool Array::operator==(const Array& rhs)
+{
+	bool temp = true;
+	for (int i = 0; i < size; i++) {
+		if (ptr[i] != rhs.ptr[i]) {
+			temp = false;
+		}
+	}
+	return temp;
+}
+
+int& Array::operator[](const int idx)
+{
+	if (idx < 1 || idx > size) {
+		throw "Subscript out of range.";
+	}
+
+	return this->ptr[idx - 1];
+}
+
+int Array::operator[](const int idx) const
+{
+	if (idx < 1 || idx > size) {
+		throw "Subscript out of range.";
+	}
+
+	return this->ptr[idx - 1];
+}
+
+void Array::resize(int a)
+{
+	delete[] ptr;
+	size = a;
+	ptr = new int[size];
+	for (int i = 0; i < size; i++) {
+		ptr[i] = 0;
+	}
+}
+
+ostream & operator<<(ostream& out, const Array& ar) {
+	for (int i = 1; i <= ar.size; i++) {
+		out << ar[i] << ",";
+	}
+	out << endl;
+	return out;
+};
+
+istream & operator>>(istream& in, Array& ar) {
+	for (int i = 1; i <= ar.size; i++) {
+		in >> ar[i];
+	}
+	return in;
+};
+
+int main()
+{
+	Array temp(100);
+	Array temp2(100);
+	cout << "Initial Array Size: " << temp.getSize() << endl;
+	cout << "Initial Array Data: " << temp;
+	cout << "What would you like to resize the first array to? ";
+	int tempNum;
+	cin >> tempNum;
+	temp.resize(tempNum);
+	cout << "Please provide values for the array" << endl;
+	cin >> temp;
+	cout << "Current Array Size: " << temp.getSize() << endl;
+	cout << "Current Array Data: " << temp;
+	cout << "There is a method in the class to compare data from one array to another." << endl;
+	cout << "Current Size for the First Array: " << temp.getSize() << endl;
+	cout << "Current Data for the First Array: " << temp;
+	cout << "Current Size for the Second Array: " << temp2.getSize() << endl;
+	cout << "Current Data for the Second Array: " << temp2;
+	if (temp == temp2) {
+		cout << "The arrays are the same." << endl;
+	}
+	else {
+		cout << "The arrays are not the same." << endl;
+	}
+	cout << "There is a method in the class to copy data from one array to another." << endl;
+	cout << "Current Size for the First Array: " << temp.getSize() << endl;
+	cout << "Current Data for the First Array: " << temp;
+	cout << "Current Size for the Second Array: " << temp2.getSize() << endl;
+	cout << "Current Data for the Second Array: " << temp2;
+	cout << "Copying...";
+	temp2 = temp;
+	cout << "Current Size for the First Array: " << temp.getSize() << endl;
+	cout << "Current Data for the First Array: " << temp;
+	cout << "Current Size for the Second Array: " << temp2.getSize() << endl;
+	cout << "Current Data for the Second Array: " << temp2;
+	system("pause");
+    return 0;
+}

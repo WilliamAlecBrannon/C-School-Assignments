@@ -1,0 +1,35 @@
+William Brannon
+Exercise 3: Class Construct
+Chapter 13
+Short Answer
+#1: A class is the definition for the programmer-defined data type and an instance of the class is a runtime instantiation of that definition with unique values for the variable types for the class.
+#2: All data and functions in a class are private by default and in a structure those are public by default.
+#3: private
+#6: A mutator function changes the data members in a class. An accesor function reads the data members in a class.
+Algorithm Workbench
+#43:
+class Circle {
+	int radius;
+public:
+	Circle(){
+		radius = 0;
+	};
+	Circle(int a) {
+		radius = a;
+	};
+	void setRadius(int a) {
+		radius = a;
+	}
+	int getRadius() {
+		return radius;
+	}
+	float getArea() { return (3.14159 * radius * radius); }
+};
+#46:
+Circle *circ = new Circle[5];
+#47:
+Circle circles[5] = {{12},{7},{9},{14},{8}};
+#48:
+for (int i = 0; i < 5; i++) {
+	cout << "Radius: " << circles[i].getRadius() << " , Area: " << circles[i].getArea() << endl;
+}

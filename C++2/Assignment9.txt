@@ -1,0 +1,546 @@
+William Brannon
+Assignment 9: Inheritance
+Programming Challenge # 1
+Testing Results:
+John Smith , Employee #394, was hired on 9/30/2018 (MM/DD/YYYY) for the night shift, with an hourly pay rate of 10$
+Press any key to continue . . .
+Source Code:
+// Assignment 9 : Inheritance
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Employee {
+protected:
+	string name;
+	int number;
+	int hireDay;
+	int hireMonth;
+	int hireYear;
+public:
+	Employee(string eName = "",int  eNumber = 0, int  hDay = 0, int  hMonth = 0, int hYear = 0) {
+		name = eName;
+		number = eNumber;
+		hireDay = hDay;
+		hireMonth = hMonth;
+		hireYear = hYear;
+	}
+	Employee(const Employee& person) {
+		name = person.name;
+		number = person.number;
+		hireDay = person.hireDay;
+		hireMonth = person.hireMonth;
+		hireYear = person.hireYear;
+	}
+	void setName(string text) {
+		name = text;
+	}
+	string getName() {
+		return name;
+	}
+	void setNumber(int num) {
+		number = num;
+	}
+	int getNumber() {
+		return number;
+	}
+	void setHireDay(int num) {
+		hireDay = num;
+	}
+	int getHireDay() {
+		return hireDay;
+	}
+	void setHireMonth(int num) {
+		hireMonth = num;
+	}
+	int getHireMonth() {
+		return hireMonth;
+	}
+	void setHireYear(int num) {
+		hireYear = num;
+	}
+	int getHireYear() {
+		return hireYear;
+	}
+};
+
+class ProductionWorker : public Employee {
+private:
+	int shift;
+	double hourlyPayRate;
+public:
+	ProductionWorker(string emName = "", int emNum = 0, int day = 0, int month = 0, int year = 0, int shiftNum = 1, double rate = 0) {
+		name = emName;
+		number = emNum;
+		hireDay = day;
+		hireMonth = month;
+		hireYear = year;
+		if (shiftNum == 1 || shiftNum == 2) {
+			shift = shiftNum;
+		}
+		else {
+			shift = 1;
+		}
+		hourlyPayRate = rate;
+	}
+	ProductionWorker(const ProductionWorker& pw) {
+		name = pw.name;
+		number = pw.number;
+		hireDay = pw.hireDay;
+		hireMonth = pw.hireMonth;
+		hireYear = pw.hireYear;
+		shift = pw.shift;
+		hourlyPayRate = pw.hourlyPayRate;
+	}
+	void setShift(int shiftNum) {
+		if (shiftNum == 1 || shiftNum == 2) {
+			shift = shiftNum;
+		}
+		else {
+			shift = 1;
+		}
+	}
+	int getShift() {
+		return shift;
+	}
+	void setRate(int rateNum) {
+		hourlyPayRate = rateNum;
+	}
+	double getRate() {
+		return hourlyPayRate;
+	}
+	void printWorker() {
+		cout << name << " , Employee #" << number << ", was hired on " << hireMonth << "/" << hireDay << "/" << hireYear << " (MM/DD/YYYY) for the ";
+		if (shift == 1) {
+			cout << "day shift";
+		}
+		if (shift == 2) {
+			cout << "night shift";
+		}
+		cout << ", with an hourly pay rate of " << hourlyPayRate << "$" << endl;
+	}
+};
+
+int main()
+{
+	ProductionWorker worker = ProductionWorker("John Smith", 394, 30, 9, 2018, 2, 10);
+	worker.printWorker();
+	system("pause");
+    return 0;
+}
+Programming Challenge #2
+Testing Results:
+Jane Doe , Employee #517, was hired on 6/15/2017 (MM/DD/YYYY). They are a shift supervisor with an annual salary of 50000$ and a production bonus of 1000$
+Press any key to continue . . .
+Source Code:
+// Assignment 9 : Inheritance
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Employee {
+protected:
+	string name;
+	int number;
+	int hireDay;
+	int hireMonth;
+	int hireYear;
+public:
+	Employee(string eName = "",int  eNumber = 0, int  hDay = 0, int  hMonth = 0, int hYear = 0) {
+		name = eName;
+		number = eNumber;
+		hireDay = hDay;
+		hireMonth = hMonth;
+		hireYear = hYear;
+	}
+	Employee(const Employee& person) {
+		name = person.name;
+		number = person.number;
+		hireDay = person.hireDay;
+		hireMonth = person.hireMonth;
+		hireYear = person.hireYear;
+	}
+	void setName(string text) {
+		name = text;
+	}
+	string getName() {
+		return name;
+	}
+	void setNumber(int num) {
+		number = num;
+	}
+	int getNumber() {
+		return number;
+	}
+	void setHireDay(int num) {
+		hireDay = num;
+	}
+	int getHireDay() {
+		return hireDay;
+	}
+	void setHireMonth(int num) {
+		hireMonth = num;
+	}
+	int getHireMonth() {
+		return hireMonth;
+	}
+	void setHireYear(int num) {
+		hireYear = num;
+	}
+	int getHireYear() {
+		return hireYear;
+	}
+};
+
+class ProductionWorker : public Employee {
+private:
+	int shift;
+	double hourlyPayRate;
+public:
+	ProductionWorker(string emName = "", int emNum = 0, int day = 0, int month = 0, int year = 0, int shiftNum = 1, double rate = 0) {
+		name = emName;
+		number = emNum;
+		hireDay = day;
+		hireMonth = month;
+		hireYear = year;
+		if (shiftNum == 1 || shiftNum == 2) {
+			shift = shiftNum;
+		}
+		else {
+			shift = 1;
+		}
+		hourlyPayRate = rate;
+	}
+	ProductionWorker(const ProductionWorker& pw) {
+		name = pw.name;
+		number = pw.number;
+		hireDay = pw.hireDay;
+		hireMonth = pw.hireMonth;
+		hireYear = pw.hireYear;
+		shift = pw.shift;
+		hourlyPayRate = pw.hourlyPayRate;
+	}
+	void setShift(int shiftNum) {
+		if (shiftNum == 1 || shiftNum == 2) {
+			shift = shiftNum;
+		}
+		else {
+			shift = 1;
+		}
+	}
+	int getShift() {
+		return shift;
+	}
+	void setRate(int rateNum) {
+		hourlyPayRate = rateNum;
+	}
+	double getRate() {
+		return hourlyPayRate;
+	}
+	void printWorker() {
+		cout << name << " , Employee #" << number << ", was hired on " << hireMonth << "/" << hireDay << "/" << hireYear << " (MM/DD/YYYY) for the ";
+		if (shift == 1) {
+			cout << "day shift";
+		}
+		if (shift == 2) {
+			cout << "night shift";
+		}
+		cout << ", with an hourly pay rate of " << hourlyPayRate << "$" << endl;
+	}
+};
+
+class ShiftSupervisor : public Employee {
+protected:
+	int annualSalary;
+	int productionBonus;
+public:
+	ShiftSupervisor(string emName = "", int emNum = 0, int day = 0, int month = 0, int year = 0, int salary = 0, int bonus = 0) {
+		name = emName;
+		number = emNum;
+		hireDay = day;
+		hireMonth = month;
+		hireYear = year;
+		annualSalary = salary;
+		productionBonus = bonus;
+	}
+	ShiftSupervisor(const ShiftSupervisor& ss) {
+		name = ss.name;
+		number = ss.number;
+		hireDay = ss.hireDay;
+		hireMonth = ss.hireMonth;
+		hireYear = ss.hireYear;
+		annualSalary = ss.annualSalary;
+		productionBonus = ss.productionBonus;
+	}
+	void setSalary(int salary) {
+		annualSalary = salary;
+	}
+	int getSalary() {
+		return annualSalary;
+	}
+	void setBonus(int bonus) {
+		productionBonus = bonus;
+	}
+	int getBonus() {
+		return productionBonus;
+	}
+	void printWorker() {
+		cout << name << " , Employee #" << number << ", was hired on " << hireMonth << "/" << hireDay << "/" << hireYear << " (MM/DD/YYYY).";
+		cout << " They are a shift supervisor with an annual salary of " << annualSalary << "$ and a production bonus of " << productionBonus << "$" << endl;
+	}
+};
+
+int main()
+{
+	//ProductionWorker worker = ProductionWorker("John Smith", 394, 30, 9, 2018, 2, 10);
+	ShiftSupervisor super = ShiftSupervisor("Jane Doe", 517, 15, 6, 2017, 50000, 1000);
+	//worker.printWorker();
+	super.printWorker();
+	system("pause");
+    return 0;
+}
+Programming Challenge #3
+Testing Results:
+Jack Harkness , Employee #101, was hired on 6/26/2010 (MM/DD/YYYY) for the day shift, with an hourly pay rate of 20$.
+They also receive a monthly bonus of 200$ and have attended 6/15 training hours.
+Press any key to continue . . .
+Source Code:
+// Assignment 9 : Inheritance
+// By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Employee {
+protected:
+	string name;
+	int number;
+	int hireDay;
+	int hireMonth;
+	int hireYear;
+public:
+	Employee(string eName = "",int  eNumber = 0, int  hDay = 0, int  hMonth = 0, int hYear = 0) {
+		name = eName;
+		number = eNumber;
+		hireDay = hDay;
+		hireMonth = hMonth;
+		hireYear = hYear;
+	}
+	Employee(const Employee& person) {
+		name = person.name;
+		number = person.number;
+		hireDay = person.hireDay;
+		hireMonth = person.hireMonth;
+		hireYear = person.hireYear;
+	}
+	void setName(string text) {
+		name = text;
+	}
+	string getName() {
+		return name;
+	}
+	void setNumber(int num) {
+		number = num;
+	}
+	int getNumber() {
+		return number;
+	}
+	void setHireDay(int num) {
+		hireDay = num;
+	}
+	int getHireDay() {
+		return hireDay;
+	}
+	void setHireMonth(int num) {
+		hireMonth = num;
+	}
+	int getHireMonth() {
+		return hireMonth;
+	}
+	void setHireYear(int num) {
+		hireYear = num;
+	}
+	int getHireYear() {
+		return hireYear;
+	}
+};
+
+class ProductionWorker : public Employee {
+protected:
+	int shift;
+	double hourlyPayRate;
+public:
+	ProductionWorker(string emName = "", int emNum = 0, int day = 0, int month = 0, int year = 0, int shiftNum = 1, double rate = 0) {
+		name = emName;
+		number = emNum;
+		hireDay = day;
+		hireMonth = month;
+		hireYear = year;
+		if (shiftNum == 1 || shiftNum == 2) {
+			shift = shiftNum;
+		}
+		else {
+			shift = 1;
+		}
+		hourlyPayRate = rate;
+	}
+	ProductionWorker(const ProductionWorker& pw) {
+		name = pw.name;
+		number = pw.number;
+		hireDay = pw.hireDay;
+		hireMonth = pw.hireMonth;
+		hireYear = pw.hireYear;
+		shift = pw.shift;
+		hourlyPayRate = pw.hourlyPayRate;
+	}
+	void setShift(int shiftNum) {
+		if (shiftNum == 1 || shiftNum == 2) {
+			shift = shiftNum;
+		}
+		else {
+			shift = 1;
+		}
+	}
+	int getShift() {
+		return shift;
+	}
+	void setRate(int rateNum) {
+		hourlyPayRate = rateNum;
+	}
+	double getRate() {
+		return hourlyPayRate;
+	}
+	void printWorker() {
+		cout << name << " , Employee #" << number << ", was hired on " << hireMonth << "/" << hireDay << "/" << hireYear << " (MM/DD/YYYY) for the ";
+		if (shift == 1) {
+			cout << "day shift";
+		}
+		if (shift == 2) {
+			cout << "night shift";
+		}
+		cout << ", with an hourly pay rate of " << hourlyPayRate << "$." << endl;
+	}
+};
+
+class ShiftSupervisor : public Employee {
+protected:
+	int annualSalary;
+	int productionBonus;
+public:
+	ShiftSupervisor(string emName = "", int emNum = 0, int day = 0, int month = 0, int year = 0, int salary = 0, int bonus = 0) {
+		name = emName;
+		number = emNum;
+		hireDay = day;
+		hireMonth = month;
+		hireYear = year;
+		annualSalary = salary;
+		productionBonus = bonus;
+	}
+	ShiftSupervisor(const ShiftSupervisor& ss) {
+		name = ss.name;
+		number = ss.number;
+		hireDay = ss.hireDay;
+		hireMonth = ss.hireMonth;
+		hireYear = ss.hireYear;
+		annualSalary = ss.annualSalary;
+		productionBonus = ss.productionBonus;
+	}
+	void setSalary(int salary) {
+		annualSalary = salary;
+	}
+	int getSalary() {
+		return annualSalary;
+	}
+	void setBonus(int bonus) {
+		productionBonus = bonus;
+	}
+	int getBonus() {
+		return productionBonus;
+	}
+	void printWorker() {
+		cout << name << " , Employee #" << number << ", was hired on " << hireMonth << "/" << hireDay << "/" << hireYear << " (MM/DD/YYYY).";
+		cout << " They are a shift supervisor with an annual salary of " << annualSalary << "$ and a production bonus of " << productionBonus << "$" << endl;
+	}
+};
+
+class TeamLeader : public ProductionWorker {
+protected:
+	int monthlyBonus;
+	int requiredTraining;
+	int attendedTraining;
+public:
+	TeamLeader(string emName = "", int emNum = 0, int day = 0, int month = 0, int year = 0, int shiftNum = 1, double rate = 0, int bonus = 0, int rTrain = 0, int aTrain = 0) {
+		name = emName;
+		number = emNum;
+		hireDay = day;
+		hireMonth = month;
+		hireYear = year;
+		if (shiftNum == 1 || shiftNum == 2) {
+			shift = shiftNum;
+		}
+		else {
+			shift = 1;
+		}
+		hourlyPayRate = rate;
+		monthlyBonus = bonus;
+		requiredTraining = rTrain;
+		attendedTraining = aTrain;
+	}
+	TeamLeader(const TeamLeader& tl) {
+		name = tl.name;
+		number = tl.number;
+		hireDay = tl.hireDay;
+		hireMonth = tl.hireMonth;
+		hireYear = tl.hireYear;
+		shift = tl.shift;
+		hourlyPayRate = tl.hourlyPayRate;
+		monthlyBonus = tl.monthlyBonus;
+		requiredTraining = tl.requiredTraining;
+		attendedTraining = tl.attendedTraining;
+	}
+	void setBonus(int bonus) {
+		monthlyBonus = bonus;
+	}
+	int getBonus() {
+		return monthlyBonus;
+	}
+	void setTrainingReq(int trainNum) {
+		requiredTraining = trainNum;
+	}
+	int getTrainingReq() {
+		return requiredTraining;
+	}
+	void setTrainingAttend(int trainNum) {
+		attendedTraining = trainNum;
+	}
+	int getTrainingAttend() {
+		return attendedTraining;
+	}
+	void printLeader() {
+		printWorker();
+		cout << "They also receive a monthly bonus of " << monthlyBonus << "$ and have attended " << attendedTraining << "/" << requiredTraining << " training hours." << endl;
+	}
+};
+
+int main()
+{
+	//ProductionWorker worker = ProductionWorker("John Smith", 394, 30, 9, 2018, 2, 10);
+	//ShiftSupervisor super = ShiftSupervisor("Jane Doe", 517, 15, 6, 2017, 50000, 1000);
+	TeamLeader leader = TeamLeader("Jack Harkness", 101, 26, 6, 2010, 1, 20, 200, 15, 6);
+	//worker.printWorker();
+	//super.printWorker();
+	leader.printLeader();
+	system("pause");
+    return 0;
+}

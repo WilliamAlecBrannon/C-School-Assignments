@@ -1,0 +1,47 @@
+William Brannon
+Exercise 11: Function Templates
+Chapter 16
+Short Answer
+#8: It is more convenient because you do not need to go through the tedium of writing functionally similar code with different data types.
+#9: You need to be careful because you need to ensure that using [] is valid for all datatypes the template will be used with.
+Algorithm Workbench
+#24:
+int searchArray(int x, int y[]) {
+	for (int i = 0; i < (sizeof(y) / sizeof(y[0])); i++) {
+		if (y[i] == x) {
+			return i;
+		}
+	}
+	throw -1;
+}
+#25:
+char *allocateMemory(int x) {
+	char *temp;
+	temp = new (std::nothrow) char[x];
+	return temp;
+}
+#26:
+template <typename T>
+T searchArray(T x, T y[]) {
+	for (T i = 0; i < (sizeof(y) / sizeof(y[0])); i++) {
+		if (y[i] == x) {
+			return i;
+		}
+	}
+	throw -1;
+}
+#27:
+template <typename T>
+void displayArray(T x[])
+{
+	for (int i = 0; i < (sizeof(x) / sizeof(x[0])); i++) {
+		std::cout << x[i] << endl;
+	}
+}
+Problem #25 as a template function:
+template <typename T>
+T *allocateMemory(int x) {
+	T *temp;
+	temp = new (std::nothrow) T[x];
+	return temp;
+}

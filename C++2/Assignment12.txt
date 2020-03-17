@@ -1,0 +1,975 @@
+William Brannon
+Assignment 12: Template Classes
+Chapter 16 Programming Challenge:
+#9 SearchableVector Modification
+Testing Results:
+0
+-1
+2
+Press any key to continue . . .
+Source Code:
+SimpleVector.h
+// SimpleVector class template
+#ifndef SIMPLEVECTOR_H
+#define SIMPLEVECTOR_H
+#include <iostream>
+#include <new> // Needed for bad_alloc exception
+#include <cstdlib> // Needed for the exit function
+using namespace std;
+
+template <class T>
+class SimpleVector
+{
+protected:
+	T * aptr; // To point to the allocated array
+	int arraySize; // Number of elements in the array
+	void memError(); // Handles memory allocation errors
+	void subError(); // Handles subscripts out of range
+public:
+	// Default constructor
+	SimpleVector()
+	{
+		aptr = 0; arraySize = 0;
+	}
+
+	// Constructor declaration
+	SimpleVector(int);
+
+	// Copy constructor declaration
+	SimpleVector(const SimpleVector &);
+
+	// Destructor declaration
+	~SimpleVector();
+
+	// Accessor to return the array size
+	int size() const
+	{
+		return arraySize;
+	}
+	void push_back(T x) {
+		// Allocate memory for the array in the temporary array.
+		T *temp = new T[arraySize + 1];
+
+		// Copy the elements of old array.
+		for (int i = 0; i < arraySize; i++) {
+			temp[i] = aptr[i];
+		}
+
+		// Push new value
+		temp[arraySize] = x;
+
+		// Delete old array
+		delete[] aptr;
+
+		// Copy array
+		aptr = temp;
+
+		// Increase size
+		arraySize++;
+	}
+
+	void pop_back() {
+		// Allocate memory for the array in the temporary array.
+		T *temp = new T[arraySize - 1];
+		// Copy the elements of old array.
+		for (int i = 0; i < (arraySize - 1); i++) {
+			temp[i] = aptr[i];
+		}
+		// Delete old array
+		delete[] aptr;
+
+		// Copy array
+		aptr = temp;
+
+		// Decrease size
+		arraySize--;
+	}
+
+	// Accessor to return a specific element
+	T getElementAt(int position);
+
+	// Overloaded [] operator declaration
+	T &operator[](const int &);
+};
+//************************************************************
+// Constructor for SimpleVector class. Sets the size of the *
+// array and allocates memory for it. *
+//************************************************************ 
+
+template <class T>
+SimpleVector<T>::SimpleVector(int s)
+{
+	arraySize = s;
+	// Allocate memory for the array.
+	try
+	{
+		aptr = new T[s];
+	}
+	catch (bad_alloc)
+	{
+		memError();
+	}
+
+	// Initialize the array.
+	for (int count = 0; count < arraySize; count++) {
+		*(aptr + count) = 0;
+	}
+}
+//*******************************************
+// Copy Constructor for SimpleVector class. *
+//*******************************************
+
+template < class T>
+SimpleVector<T>::SimpleVector(const SimpleVector &obj)
+{
+	// Copy the array size.
+	arraySize = obj.arraySize;
+
+	// Allocate memory for the array.
+	aptr = new T[arraySize];
+	if (aptr == 0) {
+		memError();
+	}
+	// Copy the elements of obj's array.
+	for (int count = 0; count < arraySize; count++) {
+		*(aptr + count) = *(obj.aptr + count);
+	}
+}
+
+//**************************************
+// Destructor for SimpleVector class. *
+//**************************************
+
+template < class T>
+SimpleVector<T>::~SimpleVector()
+{
+    if (arraySize > 0) {
+        delete[] aptr;
+    }
+}
+
+//********************************************************
+// memError function. Displays an error message and *
+// terminates the program when memory allocation fails. *
+//******************************************************** 
+
+template < class T>
+void SimpleVector<T>::memError()
+{
+	cout << "ERROR:Cannot allocate memory.\n";
+	exit(EXIT_FAILURE);
+}
+
+//************************************************************
+// subError function. Displays an error message and *
+// terminates the program when a subscript is out of range. *
+//************************************************************
+
+template < class T>
+void SimpleVector<T>::subError()
+{
+	cout << "ERROR: Subscript out of range.\n";
+	exit(EXIT_FAILURE);
+}
+
+//*******************************************************
+// getElementAt function. The argument is a subscript. *
+// This function returns the value stored at the *
+// subcript in the array. *
+//*******************************************************
+
+template < class T>
+T SimpleVector<T>::getElementAt(int sub)
+{
+	if (sub < 0 || sub >= arraySize) {
+		subError();
+	}
+	return aptr[sub];
+}
+
+//********************************************************
+// Overloaded [] operator. The argument is a subscript. *
+// This function returns a reference to the element *
+// in the array indexed by the subscript. *
+//********************************************************
+
+template < class T>
+T &SimpleVector<T>::operator[](const int &sub)
+{
+	if (sub < 0 || sub >= arraySize) {
+		subError();
+	}
+	return aptr[sub];
+}
+#endif
+SearchableVector.h
+#ifndef SEARCHABLEVECTOR_H
+#define SEARCHABLEVECTOR_H
+#include "SimpleVector.h"
+
+template <class T>
+class SearchableVector : public SimpleVector<T>
+{
+public:
+	// Default constructor
+	SearchableVector() : SimpleVector<T>()
+	{ }
+
+	// Constructor
+	SearchableVector(int size) : SimpleVector<T>(size)
+	{ }
+
+	// Copy constructor
+	SearchableVector(const SearchableVector &);
+
+	// Accessor to find an item
+	int findItemBinary(const T);
+};
+
+//*******************************************************
+// Copy constructor *
+//*******************************************************
+
+template < class T>
+SearchableVector<T>::SearchableVector(const SearchableVector &obj) : SimpleVector<T>(obj.size())
+{
+	for (int count = 0; count < this->size(); count++) {
+		this->operator[](count) = obj[count];
+	}
+}
+//********************************************************
+// findItem function *
+// This function searches for item. If item is found *
+// the subscript is returned. Otherwise −1 is returned. *
+//********************************************************
+
+//linear search form of the function
+//template <class T>
+//int SearchableVector<T>::findItem(const T item) {
+//	for (int count = 0; count <= this->size(); count++) {
+//		if (getElementAt(count) == item) {
+//			return count;
+//		}
+//	}
+//	return −1;
+//}
+
+//binary search form of the function
+template <class T>
+int SearchableVector<T>::findItemBinary(const T x) {
+	int first = 0;	// First array element
+	int last = this->arraySize - 1;	    // Last array element
+	int middle;						// Midpoint of search
+
+	while (first <= last)
+	{
+		middle = (first + last) / 2;			// Calculate midpoint
+		if (this->aptr[middle] == x)	// If value is found at mid
+			return middle;
+		else if (this->aptr[middle] > x) // If value is in lower half
+			last = middle - 1;
+		else
+			first = middle + 1;		// If value is in upper half
+	}
+	return -1;
+}
+#endif
+Assignment12.cpp
+//Assignment 12: Template Classes
+//By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include "SimpleVector.h"
+#include "SearchableVector.h"
+
+int main()
+{
+	SearchableVector<int> testVector(3);
+	testVector[0] = 3;
+	testVector[1] = 5;
+	testVector[2] = 7;
+	cout << testVector.findItemBinary(3) << endl;
+	cout << testVector.findItemBinary(6) << endl;
+	cout << testVector.findItemBinary(7) << endl;
+	system("pause");
+    return 0;
+}
+#10 SortableVector Class Template
+Testing Results:
+3
+7
+9
+Press any key to continue . . .
+Source Code:
+SortableVector.h
+#ifndef SORTABLEVECTOR_H
+#define SORTABLEVECTOR_H
+#include "SimpleVector.h"
+
+template <class T>
+class SortableVector : public SimpleVector<T>
+{
+public:
+	// Default constructor
+	SortableVector() : SimpleVector<T>()
+	{ }
+
+	// Constructor
+	SortableVector(int size) : SimpleVector<T>(size)
+	{ }
+
+	// Copy constructor
+	SortableVector(const SortableVector &);
+
+	//Sorting function
+	void selectionSort() {
+		int i, j, min_idx;
+
+		// One by one move boundary of unsorted subarray 
+		for (i = 0; i < this->arraySize - 1; i++)
+		{
+			// Find the minimum element in unsorted array 
+			min_idx = i;
+			for (j = i + 1; j < this->arraySize; j++) {
+				if (this->aptr[j] < this->aptr[min_idx]) {
+					min_idx = j;
+				}
+			}
+
+			// Swap the found minimum element with the first element 
+			swap(&this->aptr[min_idx], &this->aptr[i]);
+		}
+	}
+
+	void swap(int *xp, int *yp)
+	{
+		int temp = *xp;
+		*xp = *yp;
+		*yp = temp;
+	}
+};
+
+//*******************************************************
+// Copy constructor *
+//*******************************************************
+
+template < class T>
+SortableVector<T>::SortableVector(const SortableVector &obj) : SimpleVector<T>(obj.size())
+{
+	for (int count = 0; count < this->size(); count++) {
+		this->operator[](count) = obj[count];
+	}
+}
+#endif
+Assignment12.cpp
+//Assignment 12: Template Classes
+//By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include "SimpleVector.h"
+#include "SortableVector.h"
+
+int main()
+{
+	SortableVector<int> testVector(3);
+	testVector[0] = 7;
+	testVector[1] = 3;
+	testVector[2] = 9;
+	testVector.selectionSort();
+	for (int i = 0; i < 3; i++) {
+		cout << testVector[i] << endl;
+	}
+	system("pause");
+    return 0;
+}
+#11 Inheritance Modification
+Testing Results:
+Testing the new function:
+-1
+1
+Displaying the array:
+3
+7
+9
+Press any key to continue . . .
+Source Code:
+SearchableVector.h
+#ifndef SEARCHABLEVECTOR_H
+#define SEARCHABLEVECTOR_H
+#include "SortableVector.h"
+
+template <class T>
+class SearchableVector : public SortableVector<T>
+{
+public:
+	// Default constructor
+	SearchableVector() : SortableVector<T>()
+	{ }
+
+	// Constructor
+	SearchableVector(int size) : SortableVector<T>(size)
+	{ }
+
+	// Copy constructor
+	SearchableVector(const SearchableVector &);
+
+	// Accessor to find an item
+	int findItemBinary(const T);
+
+	int sortAndSearch(const T y) {
+		this->selectionSort();
+		return this->findItemBinary(y);
+	}
+};
+
+//*******************************************************
+// Copy constructor *
+//*******************************************************
+
+template < class T>
+SearchableVector<T>::SearchableVector(const SearchableVector &obj) : SortableVector<T>(obj.size())
+{
+	for (int count = 0; count < this->size(); count++) {
+		this->operator[](count) = obj[count];
+	}
+}
+//********************************************************
+// findItem function *
+// This function searches for item. If item is found *
+// the subscript is returned. Otherwise −1 is returned. *
+//********************************************************
+
+//linear search form of the function
+//template <class T>
+//int SearchableVector<T>::findItem(const T item) {
+//	for (int count = 0; count <= this->size(); count++) {
+//		if (getElementAt(count) == item) {
+//			return count;
+//		}
+//	}
+//	return −1;
+//}
+
+//binary search form of the function
+template <class T>
+int SearchableVector<T>::findItemBinary(const T x) {
+	int first = 0;	// First array element
+	int last = this->arraySize - 1;	    // Last array element
+	int middle;						// Midpoint of search
+
+	while (first <= last)
+	{
+		middle = (first + last) / 2;			// Calculate midpoint
+		if (this->aptr[middle] == x)	// If value is found at mid
+			return middle;
+		else if (this->aptr[middle] > x) // If value is in lower half
+			last = middle - 1;
+		else
+			first = middle + 1;		// If value is in upper half
+	}
+	return -1;
+}
+#endif
+Assignment12.cpp
+//Assignment 12: Template Classes
+//By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include "SimpleVector.h"
+#include "SortableVector.h"
+#include "SearchableVector.h"
+
+int main()
+{
+	SearchableVector<int> testVector(3);
+	testVector[0] = 7;
+	testVector[1] = 3;
+	testVector[2] = 9;
+	cout << "Testing the new function:" << endl;
+	cout << testVector.sortAndSearch(5) << endl;
+	cout << testVector.sortAndSearch(7) << endl;
+	cout << "Displaying the array:" << endl;
+    for (int i = 0; i < 3; i++) {
+        cout << testVector[i] << endl;
+    }
+	system("pause");
+    return 0;
+}
+#12 Specialized Templates
+Testing Results:
+Displaying the simple array:
+apple
+pie
+banana
+Testing the sort and search function:
+-1
+1
+Displaying the searchable array:
+hello
+hi
+world
+Press any key to continue . . .
+Source Code:
+SimpleVector.h
+// SimpleVector class template
+#ifndef SIMPLEVECTOR_H
+#define SIMPLEVECTOR_H
+#include <iostream>
+#include <new> // Needed for bad_alloc exception
+#include <cstdlib> // Needed for the exit function
+#include <string>
+using namespace std;
+
+template <class T>
+class SimpleVector
+{
+protected:
+	T * aptr; // To point to the allocated array
+	int arraySize; // Number of elements in the array
+	void memError() {
+		cout << "ERROR:Cannot allocate memory.\n";
+		exit(EXIT_FAILURE);
+	} // Handles memory allocation errors
+	void subError() {
+		cout << "ERROR: Subscript out of range.\n";
+		exit(EXIT_FAILURE);
+	} // Handles subscripts out of range
+public:
+	// Default constructor
+	SimpleVector()
+	{
+		aptr = 0; arraySize = 0;
+	}
+
+	// Constructor declaration
+	SimpleVector(int s) {
+		arraySize = s;
+		// Allocate memory for the array.
+		try
+		{
+			aptr = new T[s];
+		}
+		catch (bad_alloc)
+		{
+			memError();
+		}
+
+		// Initialize the array.
+		for (int count = 0; count < arraySize; count++) {
+			*(aptr + count) = 0;
+		}
+	}
+
+	// Copy constructor declaration
+	SimpleVector(const SimpleVector &obj){
+		// Copy the array size.
+		arraySize = obj.arraySize;
+
+		// Allocate memory for the array.
+		aptr = new T[arraySize];
+		if (aptr == 0) {
+			memError();
+		}
+		// Copy the elements of obj's array.
+		for (int count = 0; count < arraySize; count++) {
+			*(aptr + count) = *(obj.aptr + count);
+		}
+	}
+
+	// Destructor declaration
+	~SimpleVector() {
+		if (arraySize > 0) {
+			delete[] aptr;
+		}
+	}
+
+	// Accessor to return the array size
+	int size() const
+	{
+		return arraySize;
+	}
+	void push_back(T x) {
+		// Allocate memory for the array in the temporary array.
+		T *temp = new T[arraySize + 1];
+
+		// Copy the elements of old array.
+		for (int i = 0; i < arraySize; i++) {
+			temp[i] = aptr[i];
+		}
+
+		// Push new value
+		temp[arraySize] = x;
+
+		// Delete old array
+		delete[] aptr;
+
+		// Copy array
+		aptr = temp;
+
+		// Increase size
+		arraySize++;
+	}
+
+	void pop_back() {
+		// Allocate memory for the array in the temporary array.
+		T *temp = new T[arraySize - 1];
+		// Copy the elements of old array.
+		for (int i = 0; i < (arraySize - 1); i++) {
+			temp[i] = aptr[i];
+		}
+		// Delete old array
+		delete[] aptr;
+
+		// Copy array
+		aptr = temp;
+
+		// Decrease size
+		arraySize--;
+	}
+
+	// Accessor to return a specific element
+	T getElementAt(int sub) {
+		if (sub < 0 || sub >= arraySize) {
+			subError();
+		}
+		return aptr[sub];
+	}
+
+	// Overloaded [] operator declaration
+	T &operator[](const int &sub) {
+		if (sub < 0 || sub >= arraySize) {
+			subError();
+		}
+		return aptr[sub];
+	}
+};
+
+//SPECIALIZATION TEMPLATE FOR STRING
+template <>
+class SimpleVector<string>
+{
+protected:
+	string * aptr; // To point to the allocated array
+	int arraySize; // Number of elements in the array
+	void memError() {
+		cout << "ERROR:Cannot allocate memory.\n";
+		exit(EXIT_FAILURE);
+	} // Handles memory allocation errors
+	void subError() {
+		cout << "ERROR: Subscript out of range.\n";
+		exit(EXIT_FAILURE);
+	} // Handles subscripts out of range
+public:
+	// Default constructor
+	SimpleVector()
+	{
+		aptr = 0; arraySize = 0;
+	}
+
+	// Constructor declaration
+	SimpleVector(int s) {
+		arraySize = s;
+		// Allocate memory for the array.
+		try
+		{
+			aptr = new string[s];
+		}
+		catch (bad_alloc)
+		{
+			memError();
+		}
+
+		// Initialize the array.
+		for (int count = 0; count < arraySize; count++) {
+			*(aptr + count) = "";
+		}
+	}
+
+	// Copy constructor declaration
+	SimpleVector(const SimpleVector &obj) {
+		// Copy the array size.
+		arraySize = obj.arraySize;
+
+		// Allocate memory for the array.
+		aptr = new string[arraySize];
+		if (aptr == 0) {
+			memError();
+		}
+		// Copy the elements of obj's array.
+		for (int count = 0; count < arraySize; count++) {
+			*(aptr + count) = *(obj.aptr + count);
+		}
+	}
+
+	// Destructor declaration
+	~SimpleVector() {
+		if (arraySize > 0) {
+			delete[] aptr;
+		}
+	}
+
+	// Accessor to return the array size
+	int size() const
+	{
+		return arraySize;
+	}
+	void push_back(string x) {
+		// Allocate memory for the array in the temporary array.
+		string *temp = new string[arraySize + 1];
+
+		// Copy the elements of old array.
+		for (int i = 0; i < arraySize; i++) {
+			temp[i] = aptr[i];
+		}
+
+		// Push new value
+		temp[arraySize] = x;
+
+		// Delete old array
+		delete[] aptr;
+
+		// Copy array
+		aptr = temp;
+
+		// Increase size
+		arraySize++;
+	}
+
+	void pop_back() {
+		// Allocate memory for the array in the temporary array.
+		string *temp = new string[arraySize - 1];
+		// Copy the elements of old array.
+		for (int i = 0; i < (arraySize - 1); i++) {
+			temp[i] = aptr[i];
+		}
+		// Delete old array
+		delete[] aptr;
+
+		// Copy array
+		aptr = temp;
+
+		// Decrease size
+		arraySize--;
+	}
+
+	// Accessor to return a specific element
+	string getElementAt(int sub) {
+		if (sub < 0 || sub >= arraySize) {
+			subError();
+		}
+		return aptr[sub];
+	}
+
+	// Overloaded [] operator declaration
+	string &operator[](const int &sub) {
+		if (sub < 0 || sub >= arraySize) {
+			subError();
+		}
+		return aptr[sub];
+	}
+};
+#endif
+SortableVector.h
+#ifndef SORTABLEVECTOR_H
+#define SORTABLEVECTOR_H
+#include "SimpleVector.h"
+
+template <class T>
+class SortableVector : public SimpleVector<T>
+{
+public:
+	// Default constructor
+	SortableVector() : SimpleVector<T>()
+	{ }
+
+	// Constructor
+	SortableVector(int size) : SimpleVector<T>(size)
+	{ }
+
+	// Copy constructor
+	SortableVector(const SortableVector &);
+
+	//Sorting function
+	void selectionSort() {
+		int i, j, min_idx;
+
+		// One by one move boundary of unsorted subarray 
+		for (i = 0; i < this->arraySize - 1; i++)
+		{
+			// Find the minimum element in unsorted array 
+			min_idx = i;
+			for (j = i + 1; j < this->arraySize; j++) {
+				if (this->aptr[j] < this->aptr[min_idx]) {
+					min_idx = j;
+				}
+			}
+
+			// Swap the found minimum element with the first element 
+			swap(&this->aptr[min_idx], &this->aptr[i]);
+		}
+	}
+
+	void swap(T *xp, T *yp)
+	{
+		T temp = *xp;
+		*xp = *yp;
+		*yp = temp;
+	}
+};
+
+//*******************************************************
+// Copy constructor *
+//*******************************************************
+
+template < class T>
+SortableVector<T>::SortableVector(const SortableVector &obj) : SimpleVector<T>(obj.size())
+{
+	for (int count = 0; count < this->size(); count++) {
+		this->operator[](count) = obj[count];
+	}
+}
+#endif
+SearchableVector.h
+#ifndef SEARCHABLEVECTOR_H
+#define SEARCHABLEVECTOR_H
+#include "SortableVector.h"
+
+template <class T>
+class SearchableVector : public SortableVector<T>
+{
+public:
+	// Default constructor
+	SearchableVector() : SortableVector<T>()
+	{ }
+
+	// Constructor
+	SearchableVector(int size) : SortableVector<T>(size)
+	{ }
+
+	// Copy constructor
+	SearchableVector(const SearchableVector &obj) : SortableVector<T>(obj.size()) {
+		for (int count = 0; count < this->size(); count++) {
+			this->operator[](count) = obj[count];
+		}
+	}
+
+	// Accessor to find an item
+	//********************************************************
+	// findItem function *
+	// This function searches for item. If item is found *
+	// the subscript is returned. Otherwise −1 is returned. *
+	//********************************************************
+	//binary search form of the function
+	int findItemBinary(const T x) {
+		int first = 0;	// First array element
+		int last = this->arraySize - 1;	    // Last array element
+		int middle;						// Midpoint of search
+
+		while (first <= last)
+		{
+			middle = (first + last) / 2;			// Calculate midpoint
+			if (this->aptr[middle] == x)	// If value is found at mid
+				return middle;
+			else if (this->aptr[middle] > x) // If value is in lower half
+				last = middle - 1;
+			else
+				first = middle + 1;		// If value is in upper half
+		}
+		return -1;
+	}
+
+	int sortAndSearch(const T y) {
+		this->selectionSort();
+		return this->findItemBinary(y);
+	}
+};
+
+//SPECIALIZED TEMPLATE FOR STRINGS
+template <>
+class SearchableVector<string> : public SortableVector<string>
+{
+public:
+	// Default constructor
+	SearchableVector() : SortableVector<string>()
+	{ }
+
+	// Constructor
+	SearchableVector(int size) : SortableVector<string>(size)
+	{ }
+
+	// Copy constructor
+	SearchableVector(SearchableVector &obj) : SortableVector<string>(obj.size()) {
+		for (int count = 0; count < this->size(); count++) {
+			this->operator[](count) = obj.operator[](count);
+		}
+	}
+
+	// Accessor to find an item
+	//********************************************************
+	// findItem function *
+	// This function searches for item. If item is found *
+	// the subscript is returned. Otherwise −1 is returned. *
+	//********************************************************
+	//binary search form of the function
+	int findItemBinary(const string x) {
+		int first = 0;	// First array element
+		int last = this->arraySize - 1;	    // Last array element
+		int middle;						// Midpoint of search
+
+		while (first <= last)
+		{
+			middle = (first + last) / 2;			// Calculate midpoint
+			if (this->aptr[middle] == x)	// If value is found at mid
+				return middle;
+			else if (this->aptr[middle] > x) // If value is in lower half
+				last = middle - 1;
+			else
+				first = middle + 1;		// If value is in upper half
+		}
+		return -1;
+	}
+
+	int sortAndSearch(const string y) {
+		this->selectionSort();
+		return this->findItemBinary(y);
+	}
+};
+#endif
+Assignment12.cpp
+//Assignment 12: Template Classes
+//By William Brannon
+
+#include "stdafx.h"
+#include <iostream>
+#include "SimpleVector.h"
+#include "SortableVector.h"
+#include "SearchableVector.h"
+#include <string>
+
+int main()
+{
+	SimpleVector<string> testVector1(3);
+	testVector1[0] = "apple";
+	testVector1[1] = "pie";
+	testVector1[2] = "banana";
+	cout << "Displaying the simple array:" << endl;
+	for (int i = 0; i < 3; i++) {
+		cout << testVector1[i] << endl;
+	}
+	SearchableVector<string> testVector2(3);
+	testVector2[0] = "hi";
+	testVector2[1] = "hello";
+	testVector2[2] = "world";
+	cout << "Testing the sort and search function:" << endl;
+	cout << testVector2.sortAndSearch("test") << endl;
+	cout << testVector2.sortAndSearch("hi") << endl;
+	cout << "Displaying the searchable array:" << endl;
+	for (int i = 0; i < 3; i++) {
+		cout << testVector2[i] << endl;
+	}
+	system("pause");
+    return 0;
+}

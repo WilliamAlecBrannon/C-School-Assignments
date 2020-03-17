@@ -1,0 +1,244 @@
+William Brannon
+Assignment 10: Polymorphism
+Testing Results:
+Rectangles:
+The area of the object is 12 and the perimeter is 14.
+The area of the object is 10 and the perimeter is 14.
+Squares:
+The area of the object is 9 and the perimeter is 12.
+The area of the object is 25 and the perimeter is 20.
+Right Triangles:
+The area of the object is 3 and the perimeter is 13.0828.
+The area of the object is 6 and the perimeter is 12.
+Circles:
+The area of the object is 12.5664 and the perimeter is 12.5664.
+The area of the object is 153.938 and the perimeter is 43.9823.
+Spheres:
+The surface area of the object is 201.062 and the volume is 268.083.
+The surface area of the object is 314.159 and the volume is 523.599.
+Prisms:
+The surface area of the object is 290.617 and the volume is 348.74.
+The surface area of the object is 277.128 and the volume is 259.808.
+Press any key to continue . . .
+Source Code:
+// Assignment 10: Polymorphism
+// By William Brannon
+
+#include "stdafx.h"
+#include "math.h"
+#include <iostream>
+
+using namespace std;
+
+class Shape {
+protected:
+	//to keep track of whether the object needs to calculate perimeter or volume
+	bool is2D;
+public:
+	Shape(bool a = true) {
+		is2D = a;
+	}
+	virtual float area() {
+		//this function will be overwritten by other classes with specific formulas
+		return 0;
+	}
+	virtual float perimeter() {
+		//this function will be overwritten by other classes with specific formulas
+		return 0;
+	}
+	virtual float volume() {
+		//this function will be overwritten by other classes with specific formulas
+		return 0;
+	}
+	void print() {
+		if (is2D) {
+			cout << "The area of the object is " << area() << " and the perimeter is " << perimeter() << "." << endl;
+		}
+		else {
+			cout << "The surface area of the object is " << area() << " and the volume is " << volume() << "." << endl;
+		}
+	}
+};
+
+class Rectangle : public Shape {
+protected:
+	float width;
+	float height;
+public:
+	Rectangle(float w = 0, float h = 0) {
+		width = w;
+		height = h;
+		is2D = true;
+	};
+	virtual float area() {
+		return width * height;
+	}
+	virtual float perimeter() {
+		return (2 * width) + (2 * height);
+	}
+};
+
+class Square : public Rectangle {
+public:
+	Square(float s = 0) {
+		width = s;
+		height = s;
+		is2D = true;
+	}
+	//it is unneccessary to make functions for area and perimeter for a square because it inherits the properties of the rectangle
+};
+
+class RightTriangle : public Rectangle {
+public:
+	RightTriangle(float b = 0, float h = 0) {
+		//using b as a variable name instead of w because triangles generally use base and height as the names for their properties
+		width = b;
+		height = h;
+		is2D = true;
+	}
+	float area() {
+		return (width * height) / 2;
+	}
+	double hypotenuse() {
+		//formula for calculating the hypotenuse
+		//based on the pythagorean theorem
+		return sqrt(pow(width,2) + pow(height,2));
+	}
+	float perimeter() {
+		return width + height + hypotenuse();
+	}
+};
+
+class Circle : public Shape {
+protected:
+	float radius;
+public:
+	Circle(float r) {
+		radius = r;
+		is2D = true;
+	}
+	float area() {
+		//formula for area of a circle with an approximation of pi
+		return pow(radius, 2) * 3.14159265;
+	}
+	float perimeter() {
+		//formula for circumference of a circle with an approximation of pi
+		return 2 * radius * 3.14159265;
+	}
+};
+
+class Sphere : public Shape {
+protected:
+	float radius;
+public:
+	Sphere(float r) {
+		radius = r;
+		is2D = false;
+	}
+	float area() {
+		//formula for area of a sphere with an approximation of pi
+		return 4 * pow(radius, 2) * 3.14159265;
+	}
+	float volume() {
+		//formula for volume of a sphere with an approximation of pi
+		return (4 * 3.14159265 * pow(radius,3)) / 3;
+	}
+};
+
+//I was unsure of whether the Prism class was intended to just be a triangular prism or any type of prism so i created the latter.
+class RegularPolygon : public Shape {
+protected:
+	//the shortest length from the center of the polygon to the perimeter
+	float apothem;
+	//the number of sides on the polygon
+	float sides;
+public:
+	RegularPolygon(float a = 0, float s = 0) {
+		apothem = a;
+		sides = s;
+		is2D = true;
+	}
+	float sideLength() {
+		return 2 * apothem * tan(6.2831853 / (2 * sides));
+	}
+	virtual float area() {
+		//formula for area of a regular polygon
+		return (1/2) * apothem * perimeter();
+	}
+	virtual float perimeter() {
+		//formula for perimeter of a regular polygon
+		return sides * sideLength();
+	}
+};
+
+class Prism : public RegularPolygon {
+protected:
+	float height;
+public:
+	Prism(float a = 0, float s = 0, float h = 0) {
+		apothem = a;
+		sides = s;
+		height = h;
+		is2D = false;
+	}
+	float area() {
+		//formula for surface area of a generic prism
+		return (height * sideLength() * sides) + (apothem * perimeter());
+	}
+	float volume() {
+		//formula for the volume of a generic prism
+		return (apothem * perimeter() * height) / 2;
+	}
+};
+
+class ProgramDriver {
+private:
+	Shape *shapes[12];
+public:
+	ProgramDriver() {
+		shapes[0] = new Rectangle(4,3);
+		shapes[1] = new Rectangle(5, 2);
+		shapes[2] = new Square(3);
+		shapes[3] = new Square(5);
+		shapes[4] = new RightTriangle(6,1);
+		shapes[5] = new RightTriangle(3,4);
+		shapes[6] = new Circle(2);
+		shapes[7] = new Circle(7);
+		shapes[8] = new Sphere(4);
+		shapes[9] = new Sphere(5);
+		shapes[10] = new Prism(4, 5, 6);
+		shapes[11] = new Prism(5, 6, 3);
+	}
+	void printResults() {
+		cout << "Rectangles:" << endl;
+		for (int i = 0; i < 12; i++) {
+			shapes[i]->print();
+			switch (i)
+			{
+			case 1:
+				cout << "Squares:" << endl;
+				break;
+			case 3:
+				cout << "Right Triangles:" << endl;
+				break;
+			case 5:
+				cout << "Circles:" << endl;
+				break;
+			case 7:
+				cout << "Spheres:" << endl;
+				break;
+			case 9:
+				cout << "Prisms:" << endl;
+				break;
+			}
+		}
+	}
+};
+
+int main()
+{
+	ProgramDriver pd;
+	pd.printResults();
+	system("pause");
+    return 0;
+}
